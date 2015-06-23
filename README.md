@@ -34,9 +34,9 @@ Once you have your Raspberry Pi and a good microSD card (the fastest/best one yo
 
 Now that the Raspberry Pi is set up and ready to go, you need to download this repository to the Pi, then run the included playbook to install and configure everything.
 
-  1. Download the `raspberry-pi-dramble` project: `wget https://github.com/geerlingguy/raspberry-pi-dramble/archive/master.zip`
+  1. Download the `drupal-pi` project: `wget https://github.com/geerlingguy/drupal-pi/archive/master.zip`
   2. Unzip the project: `unzip master.zip`
-  3. cd into this directory: `cd raspberry-pi-dramble-master/testing/drupal/single-pi/`
+  3. cd into the project directory: `cd drupal-pi-master/`
   4. Install required Ansible roles: `sudo ansible-galaxy install -r requirements.txt`
   4. Run the Ansible playbook: `ansible-playbook -i inventory setup.yml`
 

@@ -11,13 +11,13 @@
 
   roles:
     - geerlingguy.firewall
+    - geerlingguy.git
     - geerlingguy.nginx
     - geerlingguy.mysql
     - geerlingguy.php
     - geerlingguy.php-mysql
     - geerlingguy.composer
     - geerlingguy.drush
-    - geerlingguy.git
 
   tasks:
     - name: Copy vhost configuration into place.
