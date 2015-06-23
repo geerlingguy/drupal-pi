@@ -23,7 +23,6 @@
     {{ drush_path }} make -y {{ drush_makefile_path }} --no-gitinfofile
     chdir={{ drupal_core_path }}
   when: drupal_site.stat.exists == false
-  sudo: no
 
 # Install Drupal if not already installed.
 - name: Check if site is already installed.
@@ -33,7 +32,7 @@
   register: drupal_site_installed
   failed_when: false
   changed_when: false
-  sudo: no
+  sudo_user: www-data
 
 - name: Install Drupal with drush.
   command: >
@@ -45,7 +44,7 @@
     chdir={{ drupal_core_path }}
   notify: restart webserver
   when: "'Successful' not in drupal_site_installed.stdout"
-  sudo: no
+  sudo_user: www-data
 
 - name: Add Drupal cron job.
   cron:

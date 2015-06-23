@@ -70,4 +70,4 @@ php_apc_stat: "0"
 
 # Drush configuration.
 drush_version: "master"
-drush_makefile_path: "~/drupal-pi/drupal.make.yml"
+drush_makefile_path: "{{ playbook_dir }}/drupal.make.yml"
