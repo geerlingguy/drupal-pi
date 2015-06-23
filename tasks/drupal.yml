@@ -35,7 +35,6 @@
   register: drupal_site_installed
   failed_when: false
   changed_when: false
-  sudo_user: www-data
 
 - name: Install Drupal with drush.
   command: >
@@ -47,7 +46,6 @@
     chdir={{ drupal_core_path }}
   notify: restart webserver
   when: "'Successful' not in drupal_site_installed.stdout"
-  sudo_user: www-data
 
 - name: Add Drupal cron job.
   cron:
