@@ -3,6 +3,9 @@
   stat: "path={{ drupal_core_path }}/index.php"
   register: drupal_site
 
+- name: Set a shell for www-data user.
+  user: name=www-data shell=/bin/bash
+
 - name: Ensure /var/www directory exists.
   file:
     path: /var/www
