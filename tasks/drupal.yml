@@ -1,7 +1,7 @@
 ---
-- name: Check if Drupal has already been installed.
-  stat: path=/var/local/drupal_install_complete
-  register: drupal_install_complete
+- name: Check if Drupal is already set up.
+  stat: "path={{ drupal_core_path }}/index.php"
+  register: drupal_site
 
 - name: Ensure /var/www directory exists.
   file:
@@ -9,100 +9,40 @@
     state: directory
     mode: 0755
 
-- name: Ensure drupal_docroot exists.
+- name: Ensure drupal_core_path exists.
   file:
-    path: "{{ drupal_docroot }}"
+    path: "{{ drupal_core_path }}"
     state: directory
     mode: 0755
     owner: www-data
     group: www-data
 
-- name: Ensure staging config directory has correct permissions.
-  file:
-    path: "{{ drupal_docroot }}/sites/default/config/staging"
-    state: directory
-    mode: 0755
-    owner: www-data
-    group: www-data
-  when: drupal_install_complete.stat.exists
-
-- name: Check out our Drupal 8 project to the docroot.
-  git:
-    repo: "{{ drupal_repo }}"
-    version: "{{ drupal_version }}"
-    update: yes
-    force: yes
-    dest: "{{ drupal_docroot }}"
-  register: project_updated
-  notify: restart nginx
-  sudo_user: www-data
-
-- name: Copy settings.php file into place.
-  template:
-    src: templates/settings.php.j2
-    dest: "{{ drupal_docroot }}/sites/default/settings.php"
-    owner: www-data
-    group: www-data
-  notify: restart nginx
-
-- name: Set permissions on settings.php (pre-install).
-  file:
-    path: "{{ drupal_docroot }}/sites/default/settings.php"
-    mode: 0664
-  when: not drupal_install_complete.stat.exists
-
-- name: Ensure settings.php has proper permissions.
-  file:
-    path: "{{ drupal_docroot }}/sites/default/settings.php"
-    mode: 0644
-  when: drupal_install_complete.stat.exists
-
-- name: Install Drupal.
+# Generate Drupal codebase with makefile.
+- name: Generate Drupal site with drush makefile.
   command: >
-    drush si {{ drupal_install_profile }} -y
-    --site-name="{{ site_name }}"
-    --account-name={{ drupal_admin_name }}
-    --account-pass={{ drupal_admin_password }}
-    chdir={{ drupal_docroot }}
-  when: not drupal_install_complete.stat.exists
-  sudo_user: www-data
+    {{ drush_path }} make -y {{ drush_makefile_path }} --no-gitinfofile
+    chdir={{ drupal_core_path }}
+  when: drupal_site.stat.exists == false
 
-- name: Wait for Drupal to get bootstrapped.
-  pause: seconds=5
-  when: not drupal_install_complete.stat.exists
-
-- name: Override the generated site UUID with our own.
+# Install Drupal if not already installed.
+- name: Check if site is already installed.
   command: >
-    drush config-set -y system.site uuid {{ drupal_site_uuid }}
-    chdir={{ drupal_docroot }}
-  when: not drupal_install_complete.stat.exists
-  sudo_user: www-data
+    {{ drush_path }} status bootstrap
+    chdir={{ drupal_core_path }}
+  register: drupal_site_installed
+  failed_when: false
+  changed_when: false
 
-- name: Ensure settings.php has proper permissions.
-  file:
-    path: "{{ drupal_docroot }}/sites/default/settings.php"
-    mode: 0644
-
-- name: Indicate Drupal has been installed.
-  file: path=/var/local/drupal_install_complete state=touch mode=0644
-
-- name: Run database updates.
+- name: Install Drupal with drush.
   command: >
-    drush updatedb -y
-    chdir={{ drupal_docroot }}
-  when: drupal_install_complete.stat.exists and project_updated.changed
-
-- name: Import staging configuration.
-  command: >
-    drush config-import -y staging
-    chdir={{ drupal_docroot }}
-  when: drupal_install_complete.stat.exists and project_updated.changed
-
-- name: Rebuild caches.
-  command: >
-    drush cache-rebuild --quiet
-    chdir={{ drupal_docroot }}
-  when: drupal_install_complete.stat.exists and project_updated.changed
+    {{ drush_path }} site-install standard -y
+    --site-name="{{ drupal_site_name }}"
+    --account-name={{ drupal_account_name }}
+    --account-pass={{ drupal_account_pass }}
+    --db-url=mysql://{{ mysql_users[0].name }}:{{ mysql_users[0].password }}@localhost/{{ mysql_databases[0].name }}
+    chdir={{ drupal_core_path }}
+  notify: restart webserver
+  when: "'Successful' not in drupal_site_installed.stdout"
 
 - name: Add Drupal cron job.
   cron:

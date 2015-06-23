@@ -1,0 +1,18 @@
+---
+api: 2
+
+# Drupal core (major version, e.g. 6.x, 7.x, 8.x).
+core: "8.x"
+
+projects:
+
+  # Core.
+  drupal:
+    type: "core"
+    download:
+      # Drupal core branch (e.g. "6.x", "7.x", "8.0.x").
+      branch: "8.0.x"
+      working-copy: true
+
+  # Other modules.
+  devel: "1.x-dev"
