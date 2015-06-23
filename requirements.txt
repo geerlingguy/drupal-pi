@@ -1,8 +1,8 @@
-geerlingguy.firewall
-geerlingguy.nginx
-geerlingguy.mysql
-geerlingguy.php
-geerlingguy.php-mysql
 geerlingguy.composer
 geerlingguy.drush
+geerlingguy.firewall
 geerlingguy.git
+geerlingguy.mysql
+geerlingguy.nginx
+geerlingguy.php
+geerlingguy.php-mysql
