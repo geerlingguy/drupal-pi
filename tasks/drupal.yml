@@ -23,7 +23,7 @@
 # Generate Drupal codebase with makefile.
 - name: Generate Drupal site with drush makefile.
   command: >
-    {{ drush_path }} make -y {{ drush_makefile_path }} --no-gitinfofile
+    {{ drush_path }} make -y {{ drush_makefile_path }}
     chdir={{ drupal_core_path }}
   when: drupal_site.stat.exists == false
 
