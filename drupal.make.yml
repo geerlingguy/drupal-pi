@@ -12,7 +12,7 @@ projects:
     download:
       # Drupal core branch (e.g. "6.x", "7.x", "8.0.x").
       branch: "8.0.x"
-      working-copy: true
+      working-copy: false
 
   # Other modules.
   devel: "1.x-dev"
