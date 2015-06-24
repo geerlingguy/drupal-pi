@@ -51,3 +51,11 @@ If you need to update Drupal Pi, do the following:
   2. Pull the latest changes: `git pull`
   3. Update all required Ansible roles (and install new ones): `sudo ansible-galaxy install -r requirements.txt --force`
   4. Run the Ansible playbook: `ansible-playbook -i inventory main.yml`
+
+## Resetting the Drupal Install
+
+There is a `reset.yml` playbook included that will reset the environment so you can install a fresh copy of Drupal. To run the playbook, enter the following command in the same directory as this README:
+
+    ansible-playbook -i inventory reset.yml
+
+After it finishes resetting the environment, you can run the `main.yml` playbook again to rebuild the Drupal site.

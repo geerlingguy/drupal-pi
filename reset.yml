@@ -1,0 +1,28 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  sudo: yes
+
+  vars_files:
+    - vars/main.yml
+
+  tasks:
+    - name: Ensure Drupal site codebase is removed.
+      file:
+        path: "{{ drupal_core_path }}"
+        state: absent
+      notify: restart services
+
+    - name: Ensure Drupal database is dropped.
+      mysql_db:
+        name: drupal
+        state: absent
+      notify: restart services
+
+  handlers:
+    - name: restart services
+      service: "name={{ item }} state=restarted"
+      with_items:
+        - nginx
+        - php5-fpm
+        - mysql
