@@ -47,6 +47,16 @@
   notify: restart webserver
   when: "'Successful' not in drupal_site_installed.stdout"
 
+- name: Fix file permissions on Drupal folders after install.
+  file:
+    path: "{{ drupal_core_path }}/sites/default/files"
+    owner: www-data
+    group: www-data
+    state: directory
+    recurse: true
+  notify: restart webserver
+  when: "'Successful' not in drupal_site_installed.stdout"
+
 - name: Add Drupal cron job.
   cron:
     name: "Dramble Drupal cron"
