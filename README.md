@@ -2,6 +2,8 @@
 
 **Drupal on a single Raspberry Pi**
 
+<p align="center"><img src="https://raw.githubusercontent.com/geerlingguy/drupal-pi/master/images/drupal-pi-model-2.jpg" alt="Drupal 8 on a Raspberry Pi" /></p>
+
 This project is an offshoot of the [Rasbperry Pi Dramble](https://github.com/geerlingguy/raspberry-pi-dramble) project, which helps install Drupal on a cluster ('Bramble') of Raspberry Pi 2 computers.
 
 This playbook/project makes setting up Drupal on a _single_ Raspberry Pi a very easy/simple operation.
