@@ -6,6 +6,13 @@ This project is an offshoot of the [Rasbperry Pi Dramble](https://github.com/gee
 
 This playbook/project makes setting up Drupal on a _single_ Raspberry Pi a very easy/simple operation.
 
+## Currently-supported Raspberry Pi models
+
+  - Raspberry Pi model 1 B+ (512MB RAM, single CPU core)
+  - Raspberry Pi model 2 B (1GB RAM, four CPU cores)
+
+The Raspberry Pi model 2 B is much better supported, though, and will give a much better user experience, since the Pi 2 is almost 4x faster in many common scenarios (and has double the RAM to boot!).
+
 ## Set up the Raspberry Pi
 
 Drupal requires as good a Raspberry Pi as you can afford. While Drupal will run okay on any Raspberry Pi, it's best to use a B+ (which has a single core processor and 512MB RAM) or B model 2 (which has a four-core processor and 1GB RAM).
@@ -37,11 +44,11 @@ Now that the Raspberry Pi is set up and ready to go, you need to download this r
   1. Clone the `drupal-pi` project: `git clone https://github.com/geerlingguy/drupal-pi.git`
   2. cd into the project directory: `cd drupal-pi`
   3. Install required Ansible roles: `sudo ansible-galaxy install -r requirements.txt`
-  4. Run the Ansible playbook: `ansible-playbook -i inventory main.yml`
+  4. Run the Ansible playbook: `ansible-playbook -i inventory main.yml`†
 
 After a few minutes, the playbook should complete successfully, and you should have Drupal running on your Raspberry Pi, accessible via `http://pidramble.com/` (make sure you [add an entry to your local hosts file](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file) for the Pi's address, e.g. `[PI_IP_ADDRESS]  pidramble.com`).
 
-If you want to change the version of the project installed, you can change `drupal_version` in `vars.yml`. As an example, if it's currently set to `1.2.0`, you can change it to `1.2.1`, which will update the checked out repository, and then run database updates, a config import, and a cache rebuild.
+> † _Note for Pi B+_: For the Rasbperry Pi model 1 B+ (which only has 512MB of RAM and one CPU core), you need to override the `raspberry_pi_model` variable when running the Ansible playbook (step 4 above). The command you should run (if you don't want to change the variable directly inside `vars/main.yml`) is: `ansible-playbook -i inventory main.yml --extra-vars="raspberry_pi_model='1-b+'"`
 
 ## Updating your Pi (for future versions of Drupal Pi)
 
@@ -50,7 +57,9 @@ If you need to update Drupal Pi, do the following:
   1. cd into the project directory: `cd /path/to/drupal-pi`
   2. Pull the latest changes: `git pull`
   3. Update all required Ansible roles (and install new ones): `sudo ansible-galaxy install -r requirements.txt --force`
-  4. Run the Ansible playbook: `ansible-playbook -i inventory main.yml`
+  4. Run the Ansible playbook: `ansible-playbook -i inventory main.yml`†
+
+> † _See note for Pi B+ in the above section._
 
 ## Resetting the Drupal Install
 

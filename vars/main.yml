@@ -1,4 +1,8 @@
 ---
+# Pi configuration.
+# Supported Raspberry Pi model values: "1-b+", "2-b".
+raspberry_pi_model: "2-b"
+
 # Drupal configuration.
 drupal_site_name: "Drupal Pi"
 drupal_core_path: /var/www/drupal
@@ -10,8 +14,9 @@ firewall_allowed_tcp_ports:
   - 80
 
 # Nginx configuration.
-nginx_default_release: wheezy-backports # For Nginx 1.6.x instead of 1.2.x.
-nginx_worker_processes: "4" # Set to number of CPU cores on Pi.
+# Install newer version of Nginx for Raspberry Pi model '2-b'.
+nginx_default_release: "{{ 'wheezy-backports' if 'raspberry_pi_model' == '2-b' else '' }}"
+nginx_worker_processes: "{{ '4' if 'raspberry_pi_model' == '2-b' else '1' }}" # Set to number of CPU cores on Pi.
 nginx_worker_connections: "512"
 nginx_client_max_body_size: "64m"
 nginx_keepalive_timeout: "65"
