@@ -5,4 +5,3 @@ geerlingguy.git
 geerlingguy.mysql
 geerlingguy.nginx
 geerlingguy.php
-geerlingguy.php-mysql
