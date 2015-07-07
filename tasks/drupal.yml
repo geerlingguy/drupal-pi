@@ -59,7 +59,7 @@
 
 - name: Add Drupal cron job.
   cron:
-    name: "Dramble Drupal cron"
+    name: "Drupal Pi cron"
     minute: "*/15"
     user: "{{ ansible_ssh_user }}"
     job: "/usr/local/bin/drush --quiet --root=/var/www/drupal cron -y"
