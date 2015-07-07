@@ -50,7 +50,7 @@ Now that the Raspberry Pi is set up and ready to go, you need to download this r
   3. Install required Ansible roles: `sudo ansible-galaxy install -r requirements.txt`
   4. Run the Ansible playbook: `ansible-playbook -i inventory -c local main.yml`†
 
-After a few minutes, the playbook should complete successfully, and you should have Drupal running on your Raspberry Pi, accessible via `http://pidramble.com/` (make sure you [add an entry to your local hosts file](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file) for the Pi's address, e.g. `[PI_IP_ADDRESS]  pidramble.com`).
+After a few minutes, the playbook should complete successfully, and you should have Drupal running on your Raspberry Pi, accessible via `http://drupalpi.dev/` (make sure you [add an entry to your local hosts file](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file) for the Pi's address, e.g. `[PI_IP_ADDRESS]  drupalpi.dev`).
 
 > † _Note for Pi B+_: For the Rasbperry Pi model 1 B+ (which only has 512MB of RAM and one CPU core), you need to override the `raspberry_pi_model` variable when running the Ansible playbook (step 4 above). The command you should run (if you don't want to change the variable directly inside `vars/main.yml`) is: `ansible-playbook -i inventory main.yml --extra-vars="raspberry_pi_model='1-b+'"`
 
