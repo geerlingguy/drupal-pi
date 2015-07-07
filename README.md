@@ -21,7 +21,7 @@ Drupal requires as good a Raspberry Pi as you can afford. While Drupal will run 
 
 Once you have your Raspberry Pi and a good microSD card (the fastest/best one you can get!), you will need to do a few things to set up the Raspberry Pi and get it ready to run the Drupal installation playbook:
 
-  1. Download the latest 'Raspbian' image from the [Raspberry Pi Downloads page](https://www.raspberrypi.org/downloads/).
+  1. Download the latest 'Raspbian' image from the [Raspberry Pi Downloads page](https://www.raspberrypi.org/downloads/)†.
   2. Follow the [image installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to transfer the image to your microSD card.
   3. Once Raspbian is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
   4. **If you don't have a monitor attached to the Pi**: TODO.
@@ -38,6 +38,8 @@ Once you have your Raspberry Pi and a good microSD card (the fastest/best one yo
     2. Install pip and Python dev tools: `sudo apt-get install -y python-dev python-pip`
     3. Install Ansible: `sudo pip install ansible`
   8. Test the Ansible installation: `ansible --version` (should output the Ansible version).
+
+*† If you plan on using your Pi as a headless Drupal server, you don't need all the extra software included with the default Raspbian image. I recommend instead using the latest version of the [Diet Raspbian](http://files.midwesternmac.com/#raspberry-pi-images) image, which is less than half the size of Raspbian.*
 
 ## Install LEMP software stack and Drupal
 
