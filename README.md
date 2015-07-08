@@ -31,10 +31,7 @@ Once you have your Raspberry Pi and a good microSD card (the fastest/best one yo
     4. Select the 'Advanced options' option and choose a good hostname (e.g. `my-pi`), and also set the 'memory split' to `16` MB, unless you're going to use the Pi with a GUI and need the video memory.
     5. Select the 'Finished' option to reboot the Pi.
   6. **If you have a wireless network adapter you need to set up**: Please see this guide: [Setting up a WiFi Adapter on a Raspberry Pi](http://www.midwesternmac.com/blogs/jeff-geerling/edimax-ew-7811un-tenda-w311mi-wifi-raspberry-pi).
-  7. Install Ansible:
-    1. Update the local apt cache: `sudo apt-get update`
-    2. Install pip and Python dev tools: `sudo apt-get install -y python-dev python-pip`
-    3. Install Ansible: `sudo pip install ansible`
+  7. Install Ansible via `pip`: `sudo apt-get update && sudo apt-get install -y python-dev python-pip && sudo pip install ansible`
   8. Test the Ansible installation: `ansible --version` (should output the Ansible version).
 
 *† If you plan on using your Pi as a headless Drupal server, you don't need all the extra software included with the default Raspbian image. I recommend instead using the latest version of the [Diet Raspbian](http://files.midwesternmac.com/#raspberry-pi-images) image, which is less than half the size of Raspbian.*
@@ -43,8 +40,7 @@ Once you have your Raspberry Pi and a good microSD card (the fastest/best one yo
 
 Now that the Raspberry Pi is set up and ready to go, you need to download this repository to the Pi, then run the included playbook to install and configure everything.
 
-  1. Clone the `drupal-pi` project: `git clone https://github.com/geerlingguy/drupal-pi.git`
-  2. cd into the project directory: `cd drupal-pi`
+  1. Clone the `drupal-pi` project: `git clone https://github.com/geerlingguy/drupal-pi.git && cd drupal-pi`
   3. Install required Ansible roles: `sudo ansible-galaxy install -r requirements.txt`
   4. Run the Ansible playbook: `ansible-playbook -i inventory -c local main.yml`
 
