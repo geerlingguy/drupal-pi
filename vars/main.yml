@@ -51,7 +51,7 @@ mysql_databases:
 
 # PHP configuration.
 php_install_from_source: true
-# Some example versions to try: php-5.5.26, php-5.6.10, php-7.0.0alpha2.
+# Some example versions to try: php-5.5.26, php-5.6.10, php-7.0.0beta1.
 php_source_version: "php-5.6.10"
 php_source_make_command: "make --jobs={{ ansible_processor_count }}"
 php_source_configure_command: >
