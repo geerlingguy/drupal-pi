@@ -17,15 +17,20 @@ Once you have your Raspberry Pi and a good microSD card (the fastest/best one yo
   1. Download the latest 'Raspbian' image from the [Raspberry Pi Downloads page](https://www.raspberrypi.org/downloads/)†.
   2. Follow the [image installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to transfer the image to your microSD card.
   3. Once Raspbian is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
-  4. **If you don't have a monitor attached to the Pi**: TODO.
+  4. **If you don't have a monitor attached to the Pi**:
+    1. Boot up the Raspberry Pi.
+    2. Find your Pi's IP address using a tool like [Fing](http://www.overlooksoft.com/fing), and note it's IP address.
+    3. Log into the Pi via IP address (e.g. `ssh pi@[IP-ADDRESS]`). Password is `raspberry` by default.
+    4. Run the command `sudo raspi-config`.
   5. **If you have a monitor attached to the Pi**:
     1. Boot up the Raspberry Pi. It will automatically launch the `raspi-config` tool to configure some important settings.
-    2. Select the 'Expand filesystem' option and confirm.
-    3. Select the 'Change User Password' option and enter a secure password for the `pi` account.
-    4. Select the 'Localization options' option and set your language, timezone, and keyboard settings.
-    5. Select the 'Advanced options' option and choose a good hostname (e.g. `my-pi`), and also set the 'memory split' to `16` MB, unless you're going to use the Pi with a GUI and need the video memory.
-    6. Select the 'Finished' option to reboot the Pi.
-  6. **If you have a wireless network adapter you need to set up**: Please see this guide: [Setting up a WiFi Adapter on a Raspberry Pi](http://www.midwesternmac.com/blogs/jeff-geerling/edimax-ew-7811un-tenda-w311mi-wifi-raspberry-pi)
+  6. Configure the Pi via `raspi-config`:
+    1. Select the 'Expand filesystem' option and confirm.
+    2. Select the 'Change User Password' option and enter a secure password for the `pi` account.
+    3. Select the 'Localization options' option and set your language, timezone, and keyboard settings.
+    4. Select the 'Advanced options' option and choose a good hostname (e.g. `my-pi`), and also set the 'memory split' to `16` MB, unless you're going to use the Pi with a GUI and need the video memory.
+    5. Select the 'Finished' option to reboot the Pi.
+  6. **If you have a wireless network adapter you need to set up**: Please see this guide: [Setting up a WiFi Adapter on a Raspberry Pi](http://www.midwesternmac.com/blogs/jeff-geerling/edimax-ew-7811un-tenda-w311mi-wifi-raspberry-pi).
   7. Install Ansible:
     1. Update the local apt cache: `sudo apt-get update`
     2. Install pip and Python dev tools: `sudo apt-get install -y python-dev python-pip`
