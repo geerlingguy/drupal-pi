@@ -4,7 +4,8 @@
 
   vars_files:
     - vars/main.yml
-    # Uncomment the line below to install PHP from source.
+    # To install PHP from source, uncomment the line below and comment the line
+    # in roles "geerlingguy.php-mysql".
     # - vars/source-install.yml
 
   roles:
@@ -13,6 +14,7 @@
     - geerlingguy.nginx
     - geerlingguy.mysql
     - geerlingguy.php
+    - geerlingguy.php-mysql
     - geerlingguy.composer
     - geerlingguy.drush
 
