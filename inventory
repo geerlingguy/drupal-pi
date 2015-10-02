@@ -1,3 +1,7 @@
 [pi]
-#127.0.0.1
-10.0.1.20 ansible_ssh_user=pi
+127.0.0.1
+
+# Comment the default localhost line above, and uncomment the line below
+# (replacing the IP with your Pi's IP address) if running the playbook from a
+# separate workstation.
+#10.0.1.20 ansible_ssh_user=pi
