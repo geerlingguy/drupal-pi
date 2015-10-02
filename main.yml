@@ -4,9 +4,8 @@
 
   vars_files:
     - vars/main.yml
-
-  pre_tasks:
-    - include: tasks/wheezy-backports.yml
+    # Uncomment the line below to install PHP from source.
+    # - vars/source-install.yml
 
   roles:
     - geerlingguy.firewall

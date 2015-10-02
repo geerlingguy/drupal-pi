@@ -1,0 +1,45 @@
+---
+php_install_from_source: true
+# Some example versions to try: php-5.5.30, php-5.6.14, php-7.0.0RC4.
+php_source_version: "php-7.0.0RC4"
+php_source_make_command: "make --jobs={{ ansible_processor_count }}"
+php_source_install_gmp_path: "/usr/include/arm-linux-gnueabihf/gmp.h"
+php_source_configure_command: >
+  ./configure
+  --prefix={{ php_source_install_path }}
+  --with-config-file-path={{ php_conf_path }}
+  --with-config-file-scan-dir={{ php_conf_path }}/conf.d
+  --enable-mbstring
+  --enable-zip
+  --enable-bcmath
+  --enable-pcntl
+  --enable-ftp
+  --enable-fpm
+  --enable-exif
+  --enable-calendar
+  --enable-opcache
+  --enable-pdo
+  --enable-sysvmsg
+  --enable-sysvsem
+  --enable-sysvshm
+  --enable-wddx
+  --with-curl
+  --with-mcrypt
+  --with-iconv
+  --with-gmp
+  --with-pspell
+  --with-gd
+  --with-jpeg-dir=/usr
+  --with-png-dir=/usr
+  --with-zlib-dir=/usr
+  --with-xpm-dir=/usr
+  --with-freetype-dir=/usr
+  --enable-gd-native-ttf
+  --enable-gd-jis-conv
+  --with-openssl
+  --with-pdo-mysql=/usr
+  --with-gettext=/usr
+  --with-zlib=/usr
+  --with-bz2=/usr
+  --with-recode=/usr
+  --with-mysqli=/usr/bin/mysql_config

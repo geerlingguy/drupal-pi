@@ -52,7 +52,7 @@ If you need to update Drupal Pi, do the following:
 
   1. cd into the project directory: `cd /path/to/drupal-pi`
   2. Pull the latest changes: `git pull`
-  3. Update all required Ansible roles (and install new ones): `sudo ansible-galaxy install -r requirements.txt --force`
+  3. Update all required Ansible roles (and install new ones): `sudo ansible-galaxy install -r requirements.yml --force`
   4. Run the Ansible playbook: `ansible-playbook -i inventory -c local main.yml`
 
 ## Running the Ansible playbook from another host
