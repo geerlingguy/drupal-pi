@@ -15,6 +15,11 @@ server {
         log_not_found off;
     }
 
+    location ~ /vendor {
+        deny all;
+        return 404;
+    }
+
     location ~ \..*/.*\.php$ {
         return 403;
     }
