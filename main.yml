@@ -17,6 +17,7 @@
     - geerlingguy.php-mysql
     - geerlingguy.composer
     - geerlingguy.drush
+    - geerlingguy.security
 
   tasks:
     - name: Copy vhost configuration into place.

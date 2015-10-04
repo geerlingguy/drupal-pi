@@ -5,10 +5,6 @@ drupal_core_path: /var/www/drupal
 drupal_account_name: admin
 drupal_account_pass: admin
 
-firewall_allowed_tcp_ports:
-  - 22
-  - 80
-
 # Nginx configuration.
 nginx_worker_processes: "{{ ansible_processor_count }}"
 nginx_worker_connections: "512"
@@ -55,3 +51,9 @@ php_opcache_memory_consumption: "128"
 # Drush configuration.
 drush_version: "master"
 drush_makefile_path: "{{ playbook_dir }}/drupal.make.yml"
+
+# Security configuration.
+security_sudoers_passwordless: ['pi']
+firewall_allowed_tcp_ports:
+  - 22
+  - 80

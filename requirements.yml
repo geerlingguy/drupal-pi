@@ -7,3 +7,4 @@
 - src: geerlingguy.nginx
 - src: geerlingguy.php
 - src: geerlingguy.php-mysql
+- src: geerlingguy.security
