@@ -4,7 +4,8 @@ server {
     root {{ drupal_core_path }};
 
     gzip_static on;
-    access_log off; # Save a ton of precious disk I/O.
+    # Save a ton of precious disk I/O.
+    access_log off;
 
     location = /favicon.ico {
         log_not_found off;
@@ -15,7 +16,8 @@ server {
         log_not_found off;
     }
 
-    location ~ /vendor {
+    # Don't allow direct access to PHP files in the vendor directory.
+    location ~ /vendor/.*\.php$ {
         deny all;
         return 404;
     }
