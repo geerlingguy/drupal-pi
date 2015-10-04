@@ -3,9 +3,9 @@
   sudo: yes
 
   vars_files:
-    - vars/main.yml
+    - config.yml
     # To install PHP from source, uncomment the line below and comment the line
-    # in roles "geerlingguy.php-mysql".
+    # "- geerlingguy.php-mysql" in the roles section below.
     # - vars/source-install.yml
 
   roles:

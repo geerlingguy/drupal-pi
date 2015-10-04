@@ -41,6 +41,7 @@ Once you have your Raspberry Pi and a good microSD card (the fastest/best one yo
 Now that the Raspberry Pi is set up and ready to go, you need to download this repository to the Pi, then run the included playbook to install and configure everything.
 
   1. Clone the `drupal-pi` project: `git clone https://github.com/geerlingguy/drupal-pi.git && cd drupal-pi`
+  2. Copy `example.config.yml` to `config.yml` and `example.inventory` to `inventory`.
   3. Install required Ansible roles: `sudo ansible-galaxy install -r requirements.yml`
   4. Run the Ansible playbook: `ansible-playbook -i inventory -c local main.yml`
 
@@ -57,12 +58,7 @@ If you need to update Drupal Pi, do the following:
 
 ## Running the Ansible playbook from another host
 
-If you want to run the Ansible playbook from another host (instead of from within the VM—this also allows you to do everything without installing `pip` and `ansible` on the Raspberry Pi itself!), you can change the inventory file to read as below, and use the same `ansible-playbook` command without the `-c local` option (e.g. `ansible-playbook -i inventory main.yml`):
-
-    [pi]
-    PI_IP_ADDRESS_HERE ansible_ssh_user=pi
-
-Replace `PI_IP_ADDRESS_HERE` with the IP address or domain name of your Raspberry Pi.
+If you want to run the Ansible playbook from another host (instead of from within the VM—this also allows you to do everything without installing `pip` and `ansible` on the Raspberry Pi itself!), you can change the inventory file to use the Pi's IP address instead of `127.0.0.1`, and use the same `ansible-playbook` command without the `-c local` option (e.g. `ansible-playbook -i inventory main.yml`):
 
 ## Resetting the Drupal Install
 
@@ -78,7 +74,6 @@ After it finishes resetting the environment, you can run the `main.yml` playbook
 
 Drupal Pi is focused on the Raspberry Pi model 2 B, as it has 1GB RAM and 4 CPU cores, which allows it to run, on average, 4x faster. Many tasks become unbearably slow on the B+, and would be glacial on an older model like the B, A, or A+. However, if you only have a model 1 B+ (with 512 MB of RAM), you can successfully use this project to install the LEMP stack and Drupal, after making the following changes to `vars/main.yml`:
 
-  1. Set `nginx_default_release` to `""` (an empty string).
   2. Adjust the MySQL memory requirements to lower values (typically half for each setting) so MySQL uses less RAM.
 
 ## Author

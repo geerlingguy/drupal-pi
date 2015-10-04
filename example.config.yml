@@ -10,7 +10,6 @@ firewall_allowed_tcp_ports:
   - 80
 
 # Nginx configuration.
-nginx_default_release: "wheezy-backports"
 nginx_worker_processes: "{{ ansible_processor_count }}"
 nginx_worker_connections: "512"
 nginx_client_max_body_size: "64m"
