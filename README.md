@@ -34,7 +34,9 @@ Now that the Raspberry Pi is set up and ready to go, you need to download this r
   3. Install required Ansible roles: `sudo ansible-galaxy install -r requirements.yml`
   4. Run the Ansible playbook: `ansible-playbook -i inventory -c local main.yml`
 
-After a few minutes, the playbook should complete successfully, and you should have Drupal running on your Raspberry Pi, accessible via `http://drupalpi.dev/` (make sure you [add an entry to your local hosts file](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file) for the Pi's address, e.g. `[PI_IP_ADDRESS]  drupalpi.dev`).
+After a few minutes, the playbook should complete successfully, and you should have Drupal running on your Raspberry Pi, accessible via `http://localhost/`
+
+If you want to be able to access the site via a domain like `drupalpi.dev`, [add an entry to your local hosts file](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file) like `127.0.0.1  drupalpi.dev`.
 
 ## Updating your Pi (for future versions of Drupal Pi)
 
