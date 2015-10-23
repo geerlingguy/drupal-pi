@@ -12,29 +12,18 @@ This playbook/project makes setting up Drupal on a _single_ Raspberry Pi a very 
 
 Drupal requires as good a Raspberry Pi as you can afford. While Drupal will run okay on any Raspberry Pi, it's best to use a B+ (which has a single core processor and 512MB RAM) or B model 2 (which has a four-core processor and 1GB RAM).
 
-Once you have your Raspberry Pi and a good microSD card (the fastest/best one you can get!), you will need to do a few things to set up the Raspberry Pi and get it ready to run the Drupal installation playbook:
+Once you have your Raspberry Pi and a good microSD card (the fastest/best one you can get!), you will need to do a few things to set up the Raspberry Pi and get it ready to run the Drupal installation playbook. These directions assume you're working directly on your Raspberry Pi with a keyboard and monitor attached—other installation methods are later in the README.
 
   1. Download the latest 'Raspbian' image from the [Raspberry Pi Downloads page](https://www.raspberrypi.org/downloads/)†.
   2. Follow the [image installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to transfer the image to your microSD card.
   3. Once Raspbian is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
-  4. **If you don't have a monitor attached to the Pi**:
-    1. Boot up the Raspberry Pi.
-    2. Find your Pi's IP address using a tool like [Fing](http://www.overlooksoft.com/fing), and note it's IP address.
-    3. Log into the Pi via IP address (e.g. `ssh pi@[IP-ADDRESS]`). Password is `raspberry` by default.
-    4. Run the command `sudo raspi-config`.
-  5. **If you have a monitor attached to the Pi**:
-    1. Boot up the Raspberry Pi. It will automatically launch the `raspi-config` tool to configure some important settings.
-  6. Configure the Pi via `raspi-config`:
-    1. Select the 'Expand filesystem' option and confirm.
-    2. Select the 'Change User Password' option and enter a secure password for the `pi` account.
-    3. Select the 'Localization options' option and set your language, timezone, and keyboard settings.
-    4. Select the 'Advanced options' option and choose a good hostname (e.g. `my-pi`), and also set the 'memory split' to `16` MB, unless you're going to use the Pi with a GUI and need the video memory.
-    5. Select the 'Finished' option to reboot the Pi.
-  6. **If you have a wireless network adapter you need to set up**: Please see this guide: [Setting up a WiFi Adapter on a Raspberry Pi](http://www.midwesternmac.com/blogs/jeff-geerling/edimax-ew-7811un-tenda-w311mi-wifi-raspberry-pi).
+  4. Boot up the Raspberry Pi. Once booted, open the "Raspberry Pi Configuration" tool in Menu > Preferences.
+    1. Click the 'Expand Filesystem' option in the System tab.
+    2. Click OK, then reboot the Raspberry Pi.
+  5. Once rebooted, connect the Pi to your local network either via WiFi or wired ethernet.
+  6. Open the Terminal application (in the launcher or in Menu > Accessories > Terminal).
   7. Install Ansible via `pip`: `sudo apt-get update && sudo apt-get install -y python-dev python-pip && sudo pip install ansible`
   8. Test the Ansible installation: `ansible --version` (should output the Ansible version).
-
-*† If you plan on using your Pi as a headless Drupal server, you don't need all the extra software included with the default Raspbian image. I recommend instead using the latest version of the [Diet Raspbian](http://files.midwesternmac.com/#raspberry-pi-images) image, which is less than half the size of Raspbian.*
 
 ## Install LEMP software stack and Drupal
 
@@ -59,6 +48,13 @@ If you need to update Drupal Pi, do the following:
 ## Running the Ansible playbook from another host
 
 If you want to run the Ansible playbook from another host (instead of from within the VM—this also allows you to do everything without installing `pip` and `ansible` on the Raspberry Pi itself!), you can change the inventory file to use the Pi's IP address instead of `127.0.0.1`, and use the same `ansible-playbook` command without the `-c local` option (e.g. `ansible-playbook -i inventory main.yml`):
+
+TODO - Add instructions for:
+  - Finding Raspberry Pi's IP address.
+  - Running `raspi-config`
+  - Starting from step 7 in the "Set up the Raspberry Pi" section above.
+
+*† If you plan on using your Pi as a headless Drupal server, you don't need all the extra software included with the default Raspbian image. I recommend instead using the latest version of the [Diet Raspbian](http://files.midwesternmac.com/#raspberry-pi-images) image, which is less than half the size of Raspbian.*
 
 ## Resetting the Drupal Install
 
