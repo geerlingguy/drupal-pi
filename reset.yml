@@ -4,7 +4,7 @@
   sudo: yes
 
   vars_files:
-    - vars/main.yml
+    - config.yml
 
   tasks:
     - name: Ensure Drupal site codebase is removed.
