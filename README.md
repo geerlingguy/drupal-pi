@@ -56,7 +56,7 @@ TODO - Add instructions for:
   - Running `raspi-config`
   - Starting from step 7 in the "Set up the Raspberry Pi" section above.
 
-*† If you plan on using your Pi as a headless Drupal server, you don't need all the extra software included with the default Raspbian image. I recommend instead using the latest version of the [Diet Raspbian](http://files.midwesternmac.com/#raspberry-pi-images) image, which is less than half the size of Raspbian.*
+*† If you plan on using your Pi as a headless Drupal server, you don't need all the extra software included with the default Raspbian image. I recommend you use the official 'Raspbian Lite' image instead.*
 
 ## Resetting the Drupal Install
 
