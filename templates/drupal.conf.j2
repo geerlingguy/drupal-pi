@@ -1,6 +1,12 @@
 server {
+    listen       80;
+    server_name  {{ drupal_site_redirect_uri }};
+    return       301 http://{{ drupal_site_canonical_uri }}$request_uri;
+}
+
+server {
     listen 80;
-    server_name {{ inventory_hostname }} drupalpi.dev;
+    server_name {{ inventory_hostname }} {{ drupal_site_canonical_uri }};
     root {{ drupal_core_path }};
 
     gzip_static on;

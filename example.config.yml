@@ -1,6 +1,8 @@
 ---
 # Drupal configuration.
 drupal_site_name: "Drupal Pi"
+drupal_site_canonical_uri: "www.drupalpi.dev"
+drupal_site_redirect_uri: "drupalpi.dev"
 drupal_core_path: /var/www/drupal
 drupal_account_name: admin
 drupal_account_pass: admin
