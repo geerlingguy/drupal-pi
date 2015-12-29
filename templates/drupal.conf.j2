@@ -15,15 +15,6 @@ server {
     # Save a ton of precious disk I/O.
     access_log off;
 
-    location = /favicon.ico {
-        log_not_found off;
-    }
-
-    location = /robots.txt {
-        allow all;
-        log_not_found off;
-    }
-
     location ~ \..*/.*\.php$ {
         return 403;
     }
