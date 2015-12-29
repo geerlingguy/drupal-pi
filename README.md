@@ -36,7 +36,7 @@ Now that the Raspberry Pi is set up and ready to go, you need to download this r
 
 After a few minutes, the playbook should complete successfully, and you should have Drupal running on your Raspberry Pi, accessible via `http://localhost/`
 
-If you want to be able to access the site via a domain like `drupalpi.dev`, [add an entry to your local hosts file](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file) like `127.0.0.1  drupalpi.dev`.
+To be able to access the site from other computers on your network (e.g. by accessing `http://www.drupalpi.dev/`, [add an entry to your local hosts file](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file) like `[ip-of-raspberry-pi]  www.drupalpi.dev`.
 
 ## Updating your Pi (for future versions of Drupal Pi)
 
