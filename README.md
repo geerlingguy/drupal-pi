@@ -70,11 +70,11 @@ After it finishes resetting the environment, you can run the `main.yml` playbook
 
 ## Changes required to use with Raspberry Pi model 1 B+
 
-*If at all possible, please use a Raspberry Pi model 2 B, as other Pi models will be unbearably slow.*
+*If at all possible, please use a Raspberry Pi model 2 B or 3 B, as other Pi models will be unbearably slow.*
 
-Drupal Pi is focused on the Raspberry Pi model 2 B, as it has 1GB RAM and 4 CPU cores, which allows it to run, on average, 4x faster. Many tasks become unbearably slow on the B+, and would be glacial on an older model like the B, A, or A+. However, if you only have a model 1 B+ (with 512 MB of RAM), you can successfully use this project to install the LEMP stack and Drupal, after making the following changes to `vars/main.yml`:
+Drupal Pi is focused on the Raspberry Pi model 2 B or 3 B, as these models have 1GB RAM and 4 CPU cores, and are 4-6x faster than older-generation Pis. Many tasks become unbearably slow on the B+, and would be glacial other models (B, A, A+, or Zero). However, if you only have a model 1 B+ (with 512 MB of RAM), you can successfully use this project to install the LEMP stack and Drupal, after making the following changes to `vars/main.yml`:
 
-  2. Adjust the MySQL memory requirements to lower values (typically half for each setting) so MySQL uses less RAM.
+  1. Adjust the MySQL memory requirements to lower values (typically half for each setting) so MySQL uses less RAM.
 
 ## Author
 
