@@ -7,8 +7,7 @@ php_source_install_gmp_path: "/usr/include/arm-linux-gnueabihf/gmp.h"
 php_source_configure_command: >
   ./configure
   --prefix={{ php_source_install_path }}
-  --with-config-file-path={{ php_conf_path }}
-  --with-config-file-scan-dir={{ php_conf_path }}/conf.d
+  --with-config-file-path={{ php_conf_paths | first }}
   --enable-mbstring
   --enable-zip
   --enable-bcmath

@@ -8,6 +8,10 @@
     # "- geerlingguy.php-mysql" in the roles section below.
     # - vars/source-install.yml
 
+  pre_tasks:
+    - name: Update apt cache if needed.
+      apt: update_cache=yes cache_valid_time=86400
+
   roles:
     - geerlingguy.firewall
     - geerlingguy.git
