@@ -53,5 +53,7 @@
         - mysql-client
         # For boris (drush requirement that uses missing php5-readline package).
         - libedit-dev
+        # For some flavors of Debian without cron installed by default.
+        - cron
 
     - include: tasks/drupal.yml
