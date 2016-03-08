@@ -1,4 +1,7 @@
 ---
+# Raspberry Pi configuration.
+pi_processor_count: 4
+
 # Drupal configuration.
 drupal_site_name: "Drupal Pi"
 drupal_site_canonical_uri: "www.drupalpi.dev"
@@ -8,7 +11,7 @@ drupal_account_name: admin
 drupal_account_pass: admin
 
 # Nginx configuration.
-nginx_worker_processes: "{{ ansible_processor_count | default('auto') }}"
+nginx_worker_processes: "{{ pi_processor_count }}"
 nginx_worker_connections: "512"
 nginx_client_max_body_size: "64m"
 nginx_keepalive_timeout: "65"
