@@ -54,7 +54,7 @@ If you need to update Drupal Pi, do the following:
 If you want to run the Ansible playbook from another host (instead of from within the VM—this also allows you to do everything without installing `pip` and `ansible` on the Raspberry Pi itself!), you can change the inventory file to use the Pi's IP address instead of `127.0.0.1`, and use the same `ansible-playbook` command without the `-c local` option (e.g. `ansible-playbook -i inventory main.yml`):
 
 TODO - Add instructions for:
-  - Finding Raspberry Pi's IP address.
+  - Finding Raspberry Pi's IP address (e.g. using [Fing](https://www.fingbox.com/features)).
   - Running `raspi-config`
   - Starting from step 7 in the "Set up the Raspberry Pi" section above.
 
@@ -74,7 +74,8 @@ After it finishes resetting the environment, you can run the `main.yml` playbook
 
 Drupal Pi is focused on the Raspberry Pi model 2 B or 3 B, as these models have 1GB RAM and 4 CPU cores, and are 4-6x faster than older-generation Pis. Many tasks become unbearably slow on the B+, and would be glacial other models (B, A, A+, or Zero). However, if you only have a model 1 B+ (with 512 MB of RAM), you can successfully use this project to install the LEMP stack and Drupal, after making the following changes to `vars/main.yml`:
 
-  1. Adjust the MySQL memory requirements to lower values (typically half for each setting) so MySQL uses less RAM.
+  1. Adjust the `drupal_pi_processor_count` to match the number of CPU cores on your Pi (e.g. `1` for the B+).
+  2. Adjust the MySQL memory requirements to lower values (typically half for each setting) so MySQL uses less RAM.
 
 ## Author
 

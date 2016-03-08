@@ -4,11 +4,12 @@
 
   vars_files:
     - config.yml
-    # To install PHP from source, uncomment the line below and comment the line
-    # "- geerlingguy.php-mysql" in the roles section below.
-    # - vars/source-install.yml
 
   pre_tasks:
+    - name: Include source install vars if configured.
+      include_vars: vars/source-install.yml
+      when: pi_install_php_from_source
+
     - name: Update apt cache if needed.
       apt: update_cache=yes cache_valid_time=86400
 
@@ -18,7 +19,7 @@
     - geerlingguy.nginx
     - geerlingguy.mysql
     - geerlingguy.php
-    - geerlingguy.php-mysql
+    - { role: "geerlingguy.php-mysql", when: "not pi_install_php_from_source" }
     - geerlingguy.composer
     - geerlingguy.drush
     - geerlingguy.security
