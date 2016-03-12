@@ -12,8 +12,7 @@ server {
     gzip on;
     gzip_static on;
 
-    # Save a ton of precious disk I/O.
-    access_log off;
+    access_log {{ nginx_access_log }};
 
     location ~ \..*/.*\.php$ {
         return 403;
@@ -63,12 +62,8 @@ server {
         access_log off;
     }
 
-    location ~ (^|/)\. {
-        return 403;
-    }
-
     location ~* \.(jpg|jpeg|gif|css|png|js|ico|eot|svg|ttf|woff)$ {
         expires max;
-        log_not_found off; # Save a ton of precious disk I/O.
+        log_not_found off;
     }
 }

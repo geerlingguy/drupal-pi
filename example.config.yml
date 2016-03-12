@@ -18,6 +18,7 @@ nginx_client_max_body_size: "64m"
 nginx_keepalive_timeout: "65"
 nginx_remove_default_vhost: true
 nginx_vhosts: []
+nginx_access_log: "off"
 
 # MySQL configuration.
 mysql_key_buffer_size: "16M"
