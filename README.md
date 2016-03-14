@@ -29,7 +29,7 @@ Once you have your Raspberry Pi and a good microSD card (the fastest/best one yo
 
 ## Install LEMP software stack and Drupal
 
-Now that the Raspberry Pi is set up and ready to go, you need to download this repository to the Pi, then run the included playbook to install and configure everything.
+You need to download this repository to the Pi and run the included playbook to install and configure everything.
 
   1. Clone the `drupal-pi` project: `git clone https://github.com/geerlingguy/drupal-pi.git && cd drupal-pi`
   2. Copy `example.config.yml` to `config.yml` and `example.inventory` to `inventory`.
