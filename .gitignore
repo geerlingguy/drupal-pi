@@ -1,2 +1,3 @@
+*.retry
 inventory
 config.yml

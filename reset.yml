@@ -1,6 +1,5 @@
 ---
-- hosts: 127.0.0.1
-  connection: local
+- hosts: pi
   become: yes
 
   vars_files:
@@ -19,10 +18,14 @@
         state: absent
       notify: restart services
 
+    - name: Test.
+      command: "which git"
+      notify: restart services
+
   handlers:
     - name: restart services
       service: "name={{ item }} state=restarted"
       with_items:
         - nginx
-        - php5-fpm
+        - "{{ 'php-fpm' if pi_install_php_from_source else 'php5-fpm' }}"
         - mysql
