@@ -52,6 +52,8 @@ These directions assume you're working either directly on your Raspberry Pi, run
 
 ## Install LEMP software stack and Drupal
 
+### Installing using the Raspberry Pi
+
 You need to download this repository to the Pi and run the included playbook to install and configure everything.
 
   1. Clone the `drupal-pi` project: `git clone https://github.com/geerlingguy/drupal-pi.git && cd drupal-pi`
@@ -63,6 +65,17 @@ After a few minutes, the playbook should complete successfully, and you should h
 
 To be able to access the site from other computers on your network (e.g. by accessing `http://www.drupalpi.dev/`, [add an entry to your local hosts file](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file) like `[ip-of-raspberry-pi]  www.drupalpi.dev`.
 
+### Installing using another host with Ansible installed
+
+You can run the Ansible playbook from another host (instead of from within the VM—this also allows you to do everything without installing `pip` and `ansible` on the Raspberry Pi itself!).
+
+  1. Change the `inventory` file to use the Pi's IP address instead of `127.0.0.1`.
+  2. Make sure you have your SSH private key configured for the `pi` account on the Pi (I use `ssh-copy-id` to copy my ID to the Pi).
+  3. Install required Ansible roles: `sudo ansible-galaxy install -r requirements.yml`
+  4. Run the Ansible playbook: `ansible-playbook -i inventory main.yml`
+
+Note: If you have a headless Raspberry Pi and would like to find it's IP address, one way of doing so is to use a tool like [Fing](https://www.fingbox.com/features)).
+
 ## Updating your Pi (for future versions of Drupal Pi)
 
 If you need to update Drupal Pi, do the following:
@@ -71,15 +84,6 @@ If you need to update Drupal Pi, do the following:
   2. Pull the latest changes: `git pull`
   3. Update all required Ansible roles (and install new ones): `sudo ansible-galaxy install -r requirements.yml --force`
   4. Run the Ansible playbook: `ansible-playbook -i inventory -c local main.yml`
-
-## Running the Ansible playbook from another host
-
-If you want to run the Ansible playbook from another host (instead of from within the VM—this also allows you to do everything without installing `pip` and `ansible` on the Raspberry Pi itself!), you can change the inventory file to use the Pi's IP address instead of `127.0.0.1`, and use the same `ansible-playbook` command without the `-c local` option (e.g. `ansible-playbook -i inventory main.yml`):
-
-TODO - Add instructions for:
-  - Finding Raspberry Pi's IP address (e.g. using [Fing](https://www.fingbox.com/features)).
-  - Running `raspi-config`
-  - Starting from step 7 in the "Set up the Raspberry Pi" section above.
 
 ## Resetting the Drupal Install
 
@@ -91,7 +95,7 @@ After it finishes resetting the environment, you can run the `main.yml` playbook
 
 ## Changes required to use with Raspberry Pi model 1 B+
 
-*If at all possible, please use a Raspberry Pi model 2 B or 3 B, as other Pi models will be unbearably slow.*
+*If at all possible, please use a Raspberry Pi model 2 or 3 B, as other Pi models will be unbearably slow.*
 
 Drupal Pi is focused on the Raspberry Pi model 2 B or 3 B, as these models have 1GB RAM and 4 CPU cores, and are 4-6x faster than older-generation Pis. Many tasks become unbearably slow on the B+, and would be glacial other models (B, A, A+, or Zero). However, if you only have a model 1 B+ (with 512 MB of RAM), you can successfully use this project to install the LEMP stack and Drupal, after making the following changes to `vars/main.yml`:
 
