@@ -10,20 +10,43 @@ This playbook/project makes setting up Drupal on a _single_ Raspberry Pi a very 
 
 ## Set up the Raspberry Pi
 
-Drupal requires as good a Raspberry Pi as you can afford. While Drupal will run okay on any Raspberry Pi, it's best to use a B+ (which has a single core processor and 512MB RAM) or B model 2 (which has a four-core processor and 1GB RAM).
+Drupal requires as good a Raspberry Pi as you can afford. While Drupal will run okay on any Raspberry Pi, it's best to use a B model 2 or model 3 (both have a snappy four-core processor and 1GB RAM).
 
-Once you have your Raspberry Pi and a good microSD card (the fastest/best one you can get!), you will need to do a few things to set up the Raspberry Pi and get it ready to run the Drupal installation playbook. These directions assume you're working directly on your Raspberry Pi with a keyboard and monitor attached—other installation methods are later in the README.
+Once you have your Raspberry Pi and a good microSD card (the fastest/best one you can get—see [microSD Card Benchmarks](http://www.pidramble.com/wiki/benchmarks/microsd-cards)!), you will need to do a few things to set up the Raspberry Pi and get it ready to run the Drupal installation playbook.
+
+### Set up on Raspberry Pi with Raspbian / GUI
+
+These directions assume you're working directly on your Raspberry Pi, running Raspbian, with a keyboard and monitor attached:
 
   1. Download the latest 'Raspbian' image from the [Raspberry Pi Downloads page](https://www.raspberrypi.org/downloads/)†.
   2. Follow the [image installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to transfer the image to your microSD card:
     1. Unmount the microSD card: `diskutil unmountDisk /dev/disk2`
-    2. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-jessie-lite.img | sudo dd of=/dev/disk2 bs=1m`
+    2. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-jessie.img | sudo dd of=/dev/disk2 bs=1m`
   3. Once Raspbian is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
   4. Boot up the Raspberry Pi. Once booted, open the "Raspberry Pi Configuration" tool in Menu > Preferences.
     1. Click the 'Expand Filesystem' option in the System tab.
     2. Click OK, then reboot the Raspberry Pi.
   5. Once rebooted, connect the Pi to your local network either via WiFi or wired ethernet.
   6. Open the Terminal application (in the launcher or in Menu > Accessories > Terminal).
+  7. Install Ansible via `pip`: `sudo apt-get update && sudo apt-get install -y python-dev python-pip && sudo pip install ansible`
+  8. Test the Ansible installation: `ansible --version` (should output the Ansible version).
+
+*† If you plan on using your Pi as a headless Drupal server, you don't need all the extra software included with the default Raspbian image. I recommend you use the official 'Raspbian Lite' image instead; see the next section.*
+
+### Set up on Raspberry Pi with Raspbian Lite / CLI
+
+These directions assume you're working either directly on your Raspberry Pi, running Raspbian Lite, or remotely logged into the Pi via SSH:
+
+  1. Download the latest 'Raspbian Lite' image from the [Raspberry Pi Downloads page](https://www.raspberrypi.org/downloads/)†.
+  2. Follow the [image installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to transfer the image to your microSD card:
+    1. Unmount the microSD card: `diskutil unmountDisk /dev/disk2`
+    2. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-jessie-lite.img | sudo dd of=/dev/disk2 bs=1m`
+  3. Once Raspbian Lite is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
+  4. Boot up the Raspberry Pi. Once booted, log in (default username is `pi` and default password is `raspberry`), and run `sudo raspi-config`.
+    1. Highlight 'Expand Filesystem' and hit return.
+    2. Scroll down to 'Finished', hit return, and reboot the Raspberry Pi.
+  5. Once rebooted, connect the Pi to your local network either via [WiFi](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/setting-up-wifi-with-occidentalis) or wired ethernet.
+  6. Log back in (either on the Pi directly or via SSH).
   7. Install Ansible via `pip`: `sudo apt-get update && sudo apt-get install -y python-dev python-pip && sudo pip install ansible`
   8. Test the Ansible installation: `ansible --version` (should output the Ansible version).
 
@@ -57,8 +80,6 @@ TODO - Add instructions for:
   - Finding Raspberry Pi's IP address (e.g. using [Fing](https://www.fingbox.com/features)).
   - Running `raspi-config`
   - Starting from step 7 in the "Set up the Raspberry Pi" section above.
-
-*† If you plan on using your Pi as a headless Drupal server, you don't need all the extra software included with the default Raspbian image. I recommend you use the official 'Raspbian Lite' image instead.*
 
 ## Resetting the Drupal Install
 
