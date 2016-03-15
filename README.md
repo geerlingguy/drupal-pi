@@ -93,15 +93,6 @@ There is a `reset.yml` playbook included that will reset the environment so you 
 
 After it finishes resetting the environment, you can run the `main.yml` playbook again to rebuild the Drupal site.
 
-## Changes required to use with Raspberry Pi model 1 B+
-
-*If at all possible, please use a Raspberry Pi model 2 or 3 B, as other Pi models will be unbearably slow.*
-
-Drupal Pi is focused on the Raspberry Pi model 2 B or 3 B, as these models have 1GB RAM and 4 CPU cores, and are 4-6x faster than older-generation Pis. Many tasks become unbearably slow on the B+, and would be glacial other models (B, A, A+, or Zero). However, if you only have a model 1 B+ (with 512 MB of RAM), you can successfully use this project to install the LEMP stack and Drupal, after making the following changes to `vars/main.yml`:
-
-  1. Adjust the `drupal_pi_processor_count` to match the number of CPU cores on your Pi (e.g. `1` for the B+).
-  2. Adjust the MySQL memory requirements to lower values (typically half for each setting) so MySQL uses less RAM.
-
 ## Author
 
 This project was started in 2015 by [Jeff Geerling](http://jeffgeerling.com/), author of [Ansible for DevOps](http://ansiblefordevops.com/).
