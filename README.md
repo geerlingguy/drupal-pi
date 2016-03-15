@@ -47,7 +47,7 @@ These directions assume you're working either directly on your Raspberry Pi, run
     2. Scroll down to 'Finished', hit return, and reboot the Raspberry Pi.
   5. Once rebooted, connect the Pi to your local network either via [WiFi](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/setting-up-wifi-with-occidentalis) or wired ethernet.
   6. Log back in (either on the Pi directly or via SSH).
-  7. Install Ansible via `pip`: `sudo apt-get update && sudo apt-get install -y python-dev python-pip && sudo pip install ansible`
+  7. Install Git and Ansible via `pip`: `sudo apt-get update && sudo apt-get install -y python-dev python-pip git && sudo pip install ansible`
   8. Test the Ansible installation: `ansible --version` (should output the Ansible version).
 
 ## Install LEMP software stack and Drupal
