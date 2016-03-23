@@ -66,6 +66,10 @@ php_conf_paths:
 php_extension_conf_paths:
   - /etc/php5/fpm/conf.d
   - /etc/php5/cli/conf.d
+# Uncomment for Raspbian on Raspberry Pi.
+php_source_install_gmp_path: "/usr/include/arm-linux-gnueabihf/gmp.h"
+# Uncomment for ODROBIAN on ODROID-C2.
+# php_source_install_gmp_path: "/usr/include/aarch64-linux-gnu/gmp.h"
 
 # Drush configuration.
 drush_version: "master"

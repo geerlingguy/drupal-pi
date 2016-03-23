@@ -10,8 +10,7 @@
       include_vars: vars/source-install.yml
       when: pi_install_php_from_source
 
-    - name: Update apt cache if needed.
-      apt: update_cache=yes cache_valid_time=86400
+    - include: tasks/init.yml
 
   roles:
     - geerlingguy.firewall
