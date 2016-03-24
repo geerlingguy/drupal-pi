@@ -21,7 +21,7 @@ These directions assume you're working directly on your Raspberry Pi, running Ra
   1. Download the latest 'Raspbian' image from the [Raspberry Pi Downloads page](https://www.raspberrypi.org/downloads/)†.
   2. Follow the [image installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to transfer the image to your microSD card:
     1. Unmount the microSD card: `diskutil unmountDisk /dev/disk2`
-    2. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-jessie.img | sudo dd of=/dev/disk2 bs=1m`
+    2. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-jessie.img | sudo dd of=/dev/rdisk2 bs=1m`
   3. Once Raspbian is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
   4. Boot up the Raspberry Pi. Once booted, open the "Raspberry Pi Configuration" tool in Menu > Preferences.
     1. Click the 'Expand Filesystem' option in the System tab.
@@ -40,7 +40,7 @@ These directions assume you're working either directly on your Raspberry Pi, run
   1. Download the latest 'Raspbian Lite' image from the [Raspberry Pi Downloads page](https://www.raspberrypi.org/downloads/)†.
   2. Follow the [image installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to transfer the image to your microSD card:
     1. Unmount the microSD card: `diskutil unmountDisk /dev/disk2`
-    2. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-jessie-lite.img | sudo dd of=/dev/disk2 bs=1m`
+    2. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-jessie-lite.img | sudo dd of=/dev/rdisk2 bs=1m`
   3. Once Raspbian Lite is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
   4. Boot up the Raspberry Pi. Once booted, log in (default username is `pi` and default password is `raspberry`), and run `sudo raspi-config`.
     1. Highlight 'Expand Filesystem' and hit return.
