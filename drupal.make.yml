@@ -10,8 +10,8 @@ projects:
   drupal:
     type: "core"
     download:
-      # Drupal core branch (e.g. "6.x", "7.x", "8.0.x").
-      branch: "8.0.x"
+      # Drupal core branch (e.g. "6.x", "7.x", "8.1.x").
+      branch: "8.1.x"
       working-copy: false
 
   # Other modules.
