@@ -42,6 +42,13 @@
   failed_when: false
   changed_when: false
 
+- name: Install Drupal dependencies with Composer.
+  command: >
+    composer install
+    chdir={{ drupal_core_path }}
+  notify: restart webserver
+  when: "'Successful' not in drupal_site_installed.stdout"
+
 - name: Install Drupal with drush.
   command: >
     {{ drush_path }} site-install standard -y
