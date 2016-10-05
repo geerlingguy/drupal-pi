@@ -74,5 +74,5 @@
   cron:
     name: "Drupal Pi cron"
     minute: "*/15"
-    user: "{{ ansible_ssh_user }}"
+    user: "{{ ansible_user }}"
     job: "/usr/local/bin/drush --quiet --root={{ drupal_core_path }} cron -y"
