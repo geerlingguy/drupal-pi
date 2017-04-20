@@ -32,6 +32,6 @@ script:
   # Run integration tests.
   - >
     docker exec ${container_id} curl -s --header Host:${HOSTNAME} localhost
-    | grep -q '<title>Welcome to Drupal'
+    | grep -q 'Drupal VM Production Demo'
     && (echo 'Drupal install pass' && exit 0)
     || (echo 'Drupal install fail' && exit 1)
