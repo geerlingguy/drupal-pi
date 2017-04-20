@@ -33,6 +33,11 @@ server {
         return 404;
     }
 
+    # Redirect common PHP files to their new locations.
+    location ~ ^((?!.*(?:core)).*)/(install.php|rebuild.php) {
+         return 301 $scheme://$host$1/core/$2$is_args$args;
+    }
+
     location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         fastcgi_param SCRIPT_FILENAME $request_filename;
