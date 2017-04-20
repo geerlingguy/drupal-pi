@@ -16,6 +16,9 @@ script:
   # Copy configuration files into place.
   - 'docker exec ${container_id} cp ${DRUPAL_DIR}/example.config.yml ${config_dir:-$DRUPAL_DIR}/config.yml'
 
+  # Install requirements.
+  - 'docker exec --tty ${container_id} env TERM=xterm ansible-galaxy install -r ${DRUPAL_DIR}/requirements.yml'
+
   # Ansible syntax check.
   - 'docker exec --tty ${container_id} env TERM=xterm ansible-playbook ${DRUPAL_DIR}/main.yml --syntax-check'
 
