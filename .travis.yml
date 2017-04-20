@@ -14,7 +14,8 @@ script:
   - 'container_id=$(cat ${tmpfile})'
 
   # Copy configuration files into place.
-  - 'docker exec ${container_id} cp ${DRUPAL_DIR}/example.config.yml ${config_dir:-$DRUPAL_DIR}/config.yml'
+  - 'docker exec ${container_id} cp ${DRUPAL_DIR}/example.config.yml ${DRUPAL_DIR}/config.yml'
+  - 'docker exec ${container_id} cp ${DRUPAL_DIR}/example.inventory ${DRUPAL_DIR}/inventory'
 
   # Install requirements.
   - 'docker exec --tty ${container_id} env TERM=xterm ansible-galaxy install -r ${DRUPAL_DIR}/requirements.yml'
@@ -26,7 +27,7 @@ script:
   # - 'docker exec --tty ${container_id} env TERM=xterm ansible-playbook ${DRUPAL_DIR}/tests/test-setup.yml'
 
   # Run the playbook with ansible-playbook.
-  - 'docker exec ${container_id} env TERM=xterm DRUPALVM_ENV=${DRUPALVM_ENV} ansible-playbook ${DRUPAL_DIR}/main.yml'
+  - 'docker exec ${container_id} env TERM=xterm ansible-playbook -i ${DRUPAL_DIR}/inventory ${DRUPAL_DIR}/main.yml'
 
   # Run integration tests.
   - >
