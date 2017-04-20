@@ -1,5 +1,7 @@
 # Drupal Pi
 
+[![Build Status](https://travis-ci.org/geerlingguy/drupal-pi.svg?branch=master)](https://travis-ci.org/geerlingguy/drupal-pi)
+
 **Drupal on a single Raspberry Pi**
 
 <p align="center"><img src="https://raw.githubusercontent.com/geerlingguy/drupal-pi/master/images/drupal-pi-model-2.jpg" alt="Drupal 8 on a Raspberry Pi" /></p>

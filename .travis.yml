@@ -7,11 +7,6 @@ env:
       MACHINE_NAME: drupalpi
       DRUPAL_DIR: /var/www/drupal
 
-    - type: debian
-      distro: debian8
-      init: /lib/systemd/systemd
-      run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
-
 script:
   # Run container in detached state and store the id.
   - 'tmpfile=$(mktemp)'
