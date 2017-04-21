@@ -52,6 +52,7 @@
 - name: Install Drupal with drush.
   command: >
     {{ drush_path }} site-install standard -y
+    --root={{ drupal_core_path }}
     --site-name="{{ drupal_site_name }}"
     --account-name={{ drupal_account_name }}
     --account-pass={{ drupal_account_pass }}
