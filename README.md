@@ -26,7 +26,7 @@ These directions assume you're working directly on your Raspberry Pi, running Ra
     2. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-jessie.img | sudo dd of=/dev/rdisk2 bs=1m`
   3. Once Raspbian is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
   4. Boot up the Raspberry Pi. Once booted, open the "Raspberry Pi Configuration" tool in Menu > Preferences.
-    1. Click the 'Expand Filesystem' option in the System tab.
+    1. Change the pi user account password.
     2. Click OK, then reboot the Raspberry Pi.
   5. Once rebooted, connect the Pi to your local network either via WiFi or wired ethernet.
   6. Open the Terminal application (in the launcher or in Menu > Accessories > Terminal).
@@ -43,12 +43,13 @@ These directions assume you're working either directly on your Raspberry Pi, run
   2. Follow the [image installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to transfer the image to your microSD card:
     1. Unmount the microSD card: `diskutil unmountDisk /dev/disk2`
     2. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-jessie-lite.img | sudo dd of=/dev/rdisk2 bs=1m`
+    3. Ensure SSH is enabled by adding an 'ssh' file to the boot volume: `touch /Volumes/boot/ssh`
   3. Once Raspbian Lite is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
   4. Boot up the Raspberry Pi. Once booted, log in (default username is `pi` and default password is `raspberry`), and run `sudo raspi-config`.
-    1. Highlight 'Expand Filesystem' and hit return.
+    1. Set a better password for the Pi's default user account.
     2. Scroll down to 'Finished', hit return, and reboot the Raspberry Pi.
   5. Once rebooted, connect the Pi to your local network either via [WiFi](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/setting-up-wifi-with-occidentalis) or wired ethernet.
-  6. Log back in (either on the Pi directly or via SSH).
+  6. Log back in (either on the Pi directly or via SSH).q
   7. Install Git and Ansible via `pip`: `sudo apt-get update && sudo apt-get install -y python-dev python-pip git && sudo pip install ansible`
   8. Test the Ansible installation: `ansible --version` (should output the Ansible version).
 

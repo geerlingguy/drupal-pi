@@ -54,18 +54,38 @@ php_memory_limit: "128M"
 php_max_execution_time: "240"
 php_opcache_enabled_in_ini: true
 php_opcache_memory_consumption: "128"
+php_enable_apc: false
 php_fpm_listen: "127.0.0.1:9000"
 php_fpm_listen_allowed_clients: "127.0.0.1"
 php_fpm_pm_max_children: 7
 php_fpm_pm_start_servers: 4
 php_fpm_pm_min_spare_servers: 2
 php_fpm_pm_max_spare_servers: 4
+
+# PHP version configuration - some paths need updating if using 7.0+.
+php_version: 5
+php_fpm_daemon: "php{{ php_version }}-fpm"
+php_fpm_conf_path: "/etc/php{{ php_version }}/fpm"
+php_fpm_pool_conf_path: "{{ php_fpm_conf_path }}/pool.d/www.conf"
+php_packages:
+  - php{{ php_version }}
+  - php{{ php_version }}-mcrypt
+  - php{{ php_version }}-cli
+  - php{{ php_version }}-common
+  - php{{ php_version }}-curl
+  - php{{ php_version }}-dev
+  - php{{ php_version }}-fpm
+  - php{{ php_version }}-gd
+  - php-pear
+  - libpcre3-dev
+php_mysql_package: "php{{ php_version }}-mysql"
 php_conf_paths:
-  - /etc/php5/fpm
-  - /etc/php5/cli
+  - /etc/php{{ php_version }}/fpm
+  - /etc/php{{ php_version }}/cli
 php_extension_conf_paths:
-  - /etc/php5/fpm/conf.d
-  - /etc/php5/cli/conf.d
+  - /etc/php{{ php_version }}/fpm/conf.d
+  - /etc/php{{ php_version }}/cli/conf.d
+
 # Uncomment for Raspbian on Raspberry Pi.
 php_source_install_gmp_path: "/usr/include/arm-linux-gnueabihf/gmp.h"
 # Uncomment for ODROBIAN on ODROID-C2.
