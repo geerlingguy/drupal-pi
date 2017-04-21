@@ -10,7 +10,7 @@ env:
 script:
   # Run container in detached state and store the id.
   - 'tmpfile=$(mktemp)'
-  - 'docker run --detach --add-host "${HOSTNAME}$(echo -e "\t")${MACHINE_NAME}":127.0.0.1 --volume="${PWD}":${DRUPAL_DIR}/:rw --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro geerlingguy/docker-ubuntu1604-ansible:latest /lib/systemd/systemd > "${tmpfile}"'
+  - 'docker run --detach --add-host "${HOSTNAME}$(echo -e "\t")${MACHINE_NAME}":127.0.0.1 --volume="${PWD}":${DRUPAL_DIR}/:rw --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro geerlingguy/docker-debian8-ansible:latest /lib/systemd/systemd > "${tmpfile}"'
   - 'container_id=$(cat ${tmpfile})'
 
   # Copy configuration files into place.
