@@ -1,0 +1,37 @@
+---
+services: docker
+
+env:
+  global:
+    - HOSTNAME: www.drupalpi.dev
+      MACHINE_NAME: drupalpi
+      DRUPAL_DIR: /var/www/drupal
+
+script:
+  # Run container in detached state and store the id.
+  - 'tmpfile=$(mktemp)'
+  - 'docker run --detach --add-host "${HOSTNAME}$(echo -e "\t")${MACHINE_NAME}":127.0.0.1 --volume="${PWD}":${DRUPAL_DIR}/:rw --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro geerlingguy/docker-ubuntu1604-ansible:latest /lib/systemd/systemd > "${tmpfile}"'
+  - 'container_id=$(cat ${tmpfile})'
+
+  # Copy configuration files into place.
+  - 'docker exec ${container_id} cp ${DRUPAL_DIR}/example.config.yml ${DRUPAL_DIR}/config.yml'
+  - 'docker exec ${container_id} cp ${DRUPAL_DIR}/example.inventory ${DRUPAL_DIR}/inventory'
+
+  # Install requirements.
+  - 'docker exec --tty ${container_id} env TERM=xterm ansible-galaxy install -r ${DRUPAL_DIR}/requirements.yml'
+
+  # Ansible syntax check.
+  - 'docker exec --tty ${container_id} env TERM=xterm ansible-playbook ${DRUPAL_DIR}/main.yml --syntax-check'
+
+  # Run the test setup playbook with ansible-playbook.
+  # - 'docker exec --tty ${container_id} env TERM=xterm ansible-playbook ${DRUPAL_DIR}/tests/test-setup.yml'
+
+  # Run the playbook with ansible-playbook.
+  - 'docker exec ${container_id} env TERM=xterm ansible-playbook -i ${DRUPAL_DIR}/inventory --connection=local ${DRUPAL_DIR}/main.yml'
+
+  # Run integration tests.
+  - >
+    docker exec ${container_id} curl -s --header Host:${HOSTNAME} localhost
+    | grep -q 'Drupal Pi'
+    && (echo 'Drupal install pass' && exit 0)
+    || (echo 'Drupal install fail' && exit 1)

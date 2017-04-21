@@ -1,5 +1,7 @@
 # Drupal Pi
 
+[![Build Status](https://travis-ci.org/geerlingguy/drupal-pi.svg?branch=master)](https://travis-ci.org/geerlingguy/drupal-pi)
+
 **Drupal on a single Raspberry Pi**
 
 <p align="center"><img src="https://raw.githubusercontent.com/geerlingguy/drupal-pi/master/images/drupal-pi-model-2.jpg" alt="Drupal 8 on a Raspberry Pi" /></p>
@@ -58,7 +60,7 @@ You need to download this repository to the Pi and run the included playbook to 
 
   1. Clone the `drupal-pi` project: `git clone https://github.com/geerlingguy/drupal-pi.git && cd drupal-pi`
   2. Copy `example.config.yml` to `config.yml` and `example.inventory` to `inventory`.
-  3. Install required Ansible roles: `sudo ansible-galaxy install -r requirements.yml`
+  3. Install required Ansible roles: `ansible-galaxy install -r requirements.yml`
   4. Run the Ansible playbook: `ansible-playbook -i inventory -c local main.yml`
 
 After a few minutes, the playbook should complete successfully, and you should have Drupal running on your Raspberry Pi, accessible via `http://localhost/`

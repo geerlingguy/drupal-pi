@@ -8,5 +8,9 @@
     state: directory
     mode: 0775
 
-- name: Ensure curl is present.
-  apt: name=curl state=present
+- name: Ensure dependencies are installed.
+  apt: name={{ item }} state=present
+  with_items:
+    - curl
+    - openssh-server
+    - openssh-client
