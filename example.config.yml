@@ -92,7 +92,9 @@ php_source_install_gmp_path: "/usr/include/arm-linux-gnueabihf/gmp.h"
 # php_source_install_gmp_path: "/usr/include/aarch64-linux-gnu/gmp.h"
 
 # Drush configuration.
-drush_version: "8.1.10"
+drush_launcher_install: no
+drush_composer_global_install: yes
+drush_composer_version: "~8.1"
 drush_makefile_path: "{{ playbook_dir }}/drupal.make.yml"
 
 # Security configuration.
