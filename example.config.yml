@@ -5,8 +5,8 @@ pi_install_php_from_source: false
 
 # Drupal configuration.
 drupal_site_name: "Drupal Pi"
-drupal_site_canonical_uri: "www.drupalpi.dev"
-drupal_site_redirect_uri: "drupalpi.dev"
+drupal_site_canonical_uri: "www.drupalpi.test"
+drupal_site_redirect_uri: "drupalpi.test"
 drupal_core_path: /var/www/drupal
 drupal_account_name: admin
 drupal_account_pass: admin
@@ -63,7 +63,7 @@ php_fpm_pm_min_spare_servers: 2
 php_fpm_pm_max_spare_servers: 4
 
 # PHP version configuration - some paths need updating if using 7.0+.
-php_version: 5
+php_version: 7.0
 php_fpm_daemon: "php{{ php_version }}-fpm"
 php_fpm_conf_path: "/etc/php{{ php_version }}/fpm"
 php_fpm_pool_conf_path: "{{ php_fpm_conf_path }}/pool.d/www.conf"

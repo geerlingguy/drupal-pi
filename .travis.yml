@@ -3,7 +3,7 @@ services: docker
 
 env:
   global:
-    - HOSTNAME: www.drupalpi.dev
+    - HOSTNAME: www.drupalpi.test
       MACHINE_NAME: drupalpi
       DRUPAL_DIR: /var/www/drupal
 
