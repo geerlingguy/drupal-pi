@@ -27,5 +27,5 @@
       service: "name={{ item }} state=restarted"
       with_items:
         - nginx
-        - "{{ 'php-fpm' if pi_install_php_from_source else 'php5-fpm' }}"
+        - "{{ 'php-fpm' if pi_install_php_from_source else 'php7.0-fpm' }}"
         - mysql

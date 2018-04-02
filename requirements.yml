@@ -5,6 +5,7 @@
 - src: geerlingguy.git
 - src: geerlingguy.mysql
 - src: geerlingguy.nginx
+- src: geerlingguy.php-versions
 - src: geerlingguy.php
 - src: geerlingguy.php-mysql
 - src: geerlingguy.security

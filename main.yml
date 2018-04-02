@@ -17,6 +17,7 @@
     - geerlingguy.git
     - geerlingguy.nginx
     - geerlingguy.mysql
+    - geerlingguy.php-versions
     - geerlingguy.php
     - { role: "geerlingguy.php-mysql", when: "not pi_install_php_from_source" }
     - geerlingguy.composer
@@ -31,18 +32,6 @@
         mode: 0644
       notify: restart nginx
 
-    - name: Ensure php5-fpm www pool configuration directory exists.
-      file:
-        path: /etc/php5/fpm/pool.d
-        state: directory
-
-    - name: Copy php5-fpm www pool configuration into place.
-      template:
-        src: templates/www.conf.j2
-        dest: /etc/php5/fpm/pool.d/www.conf
-        mode: 0644
-      notify: restart php-fpm
-
     - name: Ensure dependencies are installed.
       apt: "name={{ item }} state=present"
       with_items:
@@ -51,8 +40,6 @@
         - sendmail
         # So drush can connect to MySQL.
         - mysql-client
-        # For boris (drush requirement that uses missing php5-readline package).
-        - libedit-dev
         # For some flavors of Debian without cron installed by default.
         - cron
 
