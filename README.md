@@ -94,7 +94,7 @@ _Note_: Remove `-c local` if running from another host.
 
 There is a `reset.yml` playbook included that will reset the environment so you can install a fresh copy of Drupal. To run the playbook, enter the following command in the same directory as this README:
 
-    ansible-playbook -i inventory  -c local reset.yml
+    ansible-playbook -i inventory -c local reset.yml
 
 _Note_: Remove `-c local` if running from another host.
 
