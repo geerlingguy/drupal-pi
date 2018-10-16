@@ -21,16 +21,16 @@ script:
   # - 'docker exec ${container_id} ansible-lint ${DRUPAL_DIR}/main.yml'
 
   # Install requirements.
-  - 'docker exec --tty ${container_id} -e TERM=xterm ansible-galaxy install -r ${DRUPAL_DIR}/requirements.yml'
+  - 'docker exec --tty ${container_id} ansible-galaxy install -r ${DRUPAL_DIR}/requirements.yml'
 
   # Ansible syntax check.
-  - 'docker exec --tty ${container_id} -e TERM=xterm ansible-playbook ${DRUPAL_DIR}/main.yml --syntax-check'
+  - 'docker exec --tty ${container_id} ansible-playbook ${DRUPAL_DIR}/main.yml --syntax-check'
 
   # Run the test setup playbook with ansible-playbook.
-  # - 'docker exec --tty ${container_id} -e TERM=xterm ansible-playbook ${DRUPAL_DIR}/tests/test-setup.yml'
+  # - 'docker exec --tty ${container_id} ansible-playbook ${DRUPAL_DIR}/tests/test-setup.yml'
 
   # Run the playbook with ansible-playbook.
-  - 'docker exec ${container_id} -e TERM=xterm -e ANSIBLE_FORCE_COLOR=true ansible-playbook -i ${DRUPAL_DIR}/inventory --connection=local ${DRUPAL_DIR}/main.yml'
+  - 'docker exec ${container_id} env ANSIBLE_FORCE_COLOR=true ansible-playbook -i ${DRUPAL_DIR}/inventory --connection=local ${DRUPAL_DIR}/main.yml'
 
   # Run integration tests.
   - docker exec ${container_id} curl -s --header Host:${HOSTNAME} localhost
