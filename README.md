@@ -6,13 +6,13 @@
 
 <p align="center"><img src="https://raw.githubusercontent.com/geerlingguy/drupal-pi/master/images/drupal-pi-model-2.jpg" alt="Drupal 8 on a Raspberry Pi" /></p>
 
-This project is an offshoot of the [Rasbperry Pi Dramble](https://github.com/geerlingguy/raspberry-pi-dramble) project, which helps install Drupal on a cluster ('Bramble') of Raspberry Pi 2 computers.
+This project is an offshoot of the [Rasbperry Pi Dramble](https://github.com/geerlingguy/raspberry-pi-dramble) project, which helps install Drupal on a cluster ('Bramble') of Raspberry Pi computers.
 
 This playbook/project makes setting up Drupal on a _single_ Raspberry Pi a very easy/simple operation.
 
 ## Set up the Raspberry Pi
 
-Drupal requires as good a Raspberry Pi as you can afford. While Drupal will run okay on any Raspberry Pi, it's best to use a B model 2 or model 3 (both have a snappy four-core processor and 1GB RAM).
+Drupal requires as good a Raspberry Pi as you can afford. While Drupal will run okay on any Raspberry Pi, it's best to use a B model 2 B or later (newer models have a snappy four-core processor and at least 1GB RAM).
 
 Once you have your Raspberry Pi and a good microSD card (the fastest/best one you can get—see [microSD Card Benchmarks](http://www.pidramble.com/wiki/benchmarks/microsd-cards)!), you will need to do a few things to set up the Raspberry Pi and get it ready to run the Drupal installation playbook.
 
