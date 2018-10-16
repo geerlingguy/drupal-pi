@@ -17,6 +17,10 @@ script:
   - 'docker exec ${container_id} cp ${DRUPAL_DIR}/example.config.yml ${DRUPAL_DIR}/config.yml'
   - 'docker exec ${container_id} cp ${DRUPAL_DIR}/example.inventory ${DRUPAL_DIR}/inventory'
 
+  # Run ansible-lint.
+  - 'docker exec ${container_id} pip install ansible-lint'
+  - 'docker exec ${container_id} ansible-lint ${DRUPAL_DIR}/main.yml'
+
   # Install requirements.
   - 'docker exec --tty ${container_id} env TERM=xterm ansible-galaxy install -r ${DRUPAL_DIR}/requirements.yml'
 
