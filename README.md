@@ -21,17 +21,17 @@ Once you have your Raspberry Pi and a good microSD card (the fastest/best one yo
 These directions assume you're working directly on your Raspberry Pi, running Raspbian, with a keyboard and monitor attached:
 
   1. Download the latest 'Raspbian' image from the [Raspberry Pi Downloads page](https://www.raspberrypi.org/downloads/)†.
-  2. Follow the [image installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to transfer the image to your microSD card:
-    1. Unmount the microSD card: `diskutil unmountDisk /dev/disk2`
-    2. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-jessie.img | sudo dd of=/dev/rdisk2 bs=1m`
-  3. Once Raspbian is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
-  4. Boot up the Raspberry Pi. Once booted, open the "Raspberry Pi Configuration" tool in Menu > Preferences.
-    1. Change the pi user account password.
-    2. Click OK, then reboot the Raspberry Pi.
-  5. Once rebooted, connect the Pi to your local network either via WiFi or wired ethernet.
-  6. Open the Terminal application (in the launcher or in Menu > Accessories > Terminal).
-  7. Install Ansible: `sudo apt-get update && sudo apt-get install -y python-dev python-pip libffi-dev && sudo pip install ansible`
-  8. Test the Ansible installation: `ansible --version` (should output the Ansible version).
+  1. Follow the [image installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to transfer the image to your microSD card:
+     1. Unmount the microSD card: `diskutil unmountDisk /dev/disk2`
+     1. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-stretch.img | sudo dd of=/dev/rdisk2 bs=1m`
+  1. Once Raspbian is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
+  1. Boot up the Raspberry Pi. Once booted, open the "Raspberry Pi Configuration" tool in Menu > Preferences.
+     1. Change the pi user account password.
+     2. Click OK, then reboot the Raspberry Pi.
+  1. Once rebooted, connect the Pi to your local network either via WiFi or wired ethernet.
+  1. Open the Terminal application (in the launcher or in Menu > Accessories > Terminal).
+  1. Install Ansible: `sudo apt-get update && sudo apt-get install -y python-dev python-pip libffi-dev && sudo pip install ansible`
+  1. Test the Ansible installation: `ansible --version` (should output the Ansible version).
 
 *† If you plan on using your Pi as a headless Drupal server, you don't need all the extra software included with the default Raspbian image. I recommend you use the official 'Raspbian Lite' image instead; see the next section.*
 
@@ -40,18 +40,18 @@ These directions assume you're working directly on your Raspberry Pi, running Ra
 These directions assume you're working either directly on your Raspberry Pi, running Raspbian Lite, or remotely logged into the Pi via SSH:
 
   1. Download the latest 'Raspbian Lite' image from the [Raspberry Pi Downloads page](https://www.raspberrypi.org/downloads/)†.
-  2. Follow the [image installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to transfer the image to your microSD card:
-    1. Unmount the microSD card: `diskutil unmountDisk /dev/disk2`
-    2. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-jessie-lite.img | sudo dd of=/dev/rdisk2 bs=1m`
-    3. Ensure SSH is enabled by adding an 'ssh' file to the boot volume: `touch /Volumes/boot/ssh`
-  3. Once Raspbian Lite is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
-  4. Boot up the Raspberry Pi. Once booted, log in (default username is `pi` and default password is `raspberry`), and run `sudo raspi-config`.
-    1. Set a better password for the Pi's default user account.
-    2. Scroll down to 'Finished', hit return, and reboot the Raspberry Pi.
-  5. Once rebooted, connect the Pi to your local network either via [WiFi](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/setting-up-wifi-with-occidentalis) or wired ethernet.
-  6. Log back in (either on the Pi directly or via SSH).q
+  1. Follow the [image installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to transfer the image to your microSD card:
+     1. Unmount the microSD card: `diskutil unmountDisk /dev/disk2`
+     1. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-stretch-lite.img | sudo dd of=/dev/rdisk2 bs=1m`
+     1. Ensure SSH is enabled by adding an 'ssh' file to the boot volume: `touch /Volumes/boot/ssh`
+  1. Once Raspbian Lite is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
+  1. Boot up the Raspberry Pi. Once booted, log in (default username is `pi` and default password is `raspberry`), and run `sudo raspi-config`.
+     1. Set a better password for the Pi's default user account.
+     1. Scroll down to 'Finished', hit return, and reboot the Raspberry Pi.
+  1. Once rebooted, connect the Pi to your local network either via [WiFi](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/setting-up-wifi-with-occidentalis) or wired ethernet.
+  1. Log back in (either on the Pi directly or via SSH).q
   7. Install Git and Ansible: `sudo apt-get update && sudo apt-get install -y python-dev python-pip libffi-dev git && sudo pip install ansible`
-  8. Test the Ansible installation: `ansible --version` (should output the Ansible version).
+  1. Test the Ansible installation: `ansible --version` (should output the Ansible version).
 
 ## Install LEMP software stack and Drupal
 
@@ -60,22 +60,25 @@ These directions assume you're working either directly on your Raspberry Pi, run
 You need to download this repository to the Pi and run the included playbook to install and configure everything.
 
   1. Clone the `drupal-pi` project: `git clone https://github.com/geerlingguy/drupal-pi.git && cd drupal-pi`
-  2. Copy `example.config.yml` to `config.yml` and `example.inventory` to `inventory`.
-  3. Install required Ansible roles: `ansible-galaxy install -r requirements.yml`
-  4. Run the Ansible playbook: `ansible-playbook -i inventory -c local main.yml`
+  1. Copy `example.inventory` to `inventory`.
+  1. (Optional) Create a `config.yml` and override any settings from `default.config.yml` as needed.
+  1. Install required Ansible roles: `ansible-galaxy install -r requirements.yml`
+  1. Run the Ansible playbook: `ansible-playbook -i inventory -c local main.yml`
 
 After a few minutes, the playbook should complete successfully, and you should have Drupal running on your Raspberry Pi, accessible via `http://localhost/`
 
 To be able to access the site from other computers on your network (e.g. by accessing `http://www.drupalpi.test/`, [add an entry to your local hosts file](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file) like `[ip-of-raspberry-pi]  www.drupalpi.test`.
+
+> **NOTE**: For best security, you should create a `config.yml` file and at least override any `password` settings from the `default.config.yml` file (e.g. `mysql_root_password` and `drupal_db_password`).
 
 ### Installing using another host with Ansible installed
 
 You can run the Ansible playbook from another host (instead of from within the VM—this also allows you to do everything without installing `pip` and `ansible` on the Raspberry Pi itself!).
 
   1. Change the `inventory` file to use the Pi's IP address instead of `127.0.0.1`.
-  2. Make sure you have your SSH private key configured for the `pi` account on the Pi (I use `ssh-copy-id` to copy my ID to the Pi).
-  3. Install required Ansible roles: `ansible-galaxy install -r requirements.yml`
-  4. Run the Ansible playbook: `ansible-playbook -i inventory main.yml`
+  1. Make sure you have your SSH private key configured for the `pi` account on the Pi (I use `ssh-copy-id` to copy my ID to the Pi).
+  1. Install required Ansible roles: `ansible-galaxy install -r requirements.yml`
+  1. Run the Ansible playbook: `ansible-playbook -i inventory main.yml`
 
 Note: If you have a headless Raspberry Pi and would like to find it's IP address, one way of doing so is to use a tool like [Fing](https://www.fingbox.com/features)).
 

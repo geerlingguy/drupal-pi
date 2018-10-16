@@ -13,13 +13,12 @@ script:
   - 'docker run --detach --add-host "${HOSTNAME}$(echo -e "\t")${MACHINE_NAME}":127.0.0.1 --volume="${PWD}":${DRUPAL_DIR}/:rw --privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro geerlingguy/docker-debian8-ansible:latest /lib/systemd/systemd > "${tmpfile}"'
   - 'container_id=$(cat ${tmpfile})'
 
-  # Copy configuration files into place.
-  - 'docker exec ${container_id} cp ${DRUPAL_DIR}/example.config.yml ${DRUPAL_DIR}/config.yml'
+  # Copy inventory file into place.
   - 'docker exec ${container_id} cp ${DRUPAL_DIR}/example.inventory ${DRUPAL_DIR}/inventory'
 
   # Run ansible-lint.
-  - 'docker exec ${container_id} pip install ansible-lint'
-  - 'docker exec ${container_id} ansible-lint ${DRUPAL_DIR}/main.yml'
+  # - 'docker exec ${container_id} pip install ansible-lint'
+  # - 'docker exec ${container_id} ansible-lint ${DRUPAL_DIR}/main.yml'
 
   # Install requirements.
   - 'docker exec --tty ${container_id} env TERM=xterm ansible-galaxy install -r ${DRUPAL_DIR}/requirements.yml'

@@ -4,12 +4,28 @@ drupal_pi_processor_count: 4
 pi_install_php_from_source: false
 
 # Drupal configuration.
+drupal_install_site: true
 drupal_site_name: "Drupal Pi"
-drupal_site_canonical_uri: "www.drupalpi.test"
+drupal_domain: "www.drupalpi.test"
+drupal_site_canonical_uri: "{{ drupal_domain }}"
 drupal_site_redirect_uri: "drupalpi.test"
+
 drupal_core_path: /var/www/drupal
+drupal_db_user: drupal
+drupal_db_password: supersecure
+drupal_db_name: drupal
+
 drupal_account_name: admin
 drupal_account_pass: admin
+
+# The following configuration builds a new Drupal 8 site. Look up the role
+# documentation for geerlingguy.drupal for instructions building via Drush make
+# or deploying an existing Drupal codebase.
+drupal_build_makefile: false
+drupal_build_composer: false
+drupal_build_composer_project: true
+drupal_composer_project_package: "drupal-composer/drupal-project:8.x-dev"
+drupal_composer_project_options: "--prefer-dist --stability dev --no-interaction"
 
 # Nginx configuration.
 nginx_worker_processes: "{{ drupal_pi_processor_count }}"
@@ -36,16 +52,19 @@ mysql_innodb_log_buffer_size: "4M"
 mysql_innodb_flush_log_at_trx_commit: "2"
 mysql_root_password: supersecure
 mysql_users:
-  - name: drupal
+  - name: "{{ drupal_db_user }}"
     host: "%"
-    password: supersecure
-    priv: "drupal.*:ALL"
+    password: "{{ drupal_db_password }}"
+    priv: "{{ drupal_db_name }}.*:ALL"
 
 mysql_databases:
-  - name: drupal
+  - name: "{{ drupal_db_name }}"
     collation: utf8_general_ci
     encoding: utf8
     replicate: 0
+
+# PHP version configuration.
+php_version: "7.1"
 
 # PHP configuration.
 php_webserver_daemon: "nginx"
@@ -61,19 +80,10 @@ php_fpm_pm_start_servers: 4
 php_fpm_pm_min_spare_servers: 2
 php_fpm_pm_max_spare_servers: 4
 
-# PHP version configuration.
-php_version: "7.0"
-
 # Uncomment for Raspbian on Raspberry Pi.
 php_source_install_gmp_path: "/usr/include/arm-linux-gnueabihf/gmp.h"
 # Uncomment for ODROBIAN on ODROID-C2.
 # php_source_install_gmp_path: "/usr/include/aarch64-linux-gnu/gmp.h"
-
-# Drush configuration.
-drush_launcher_install: no
-drush_composer_global_install: yes
-drush_composer_version: "~8.1"
-drush_makefile_path: "{{ playbook_dir }}/drupal.make.yml"
 
 # Security configuration.
 security_sudoers_passwordless: ['pi']

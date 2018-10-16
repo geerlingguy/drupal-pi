@@ -6,6 +6,7 @@
     - config.yml
 
   tasks:
+    # TODO: This may not work post-Issue #21. Update it.
     - name: Ensure Drupal site codebase is removed.
       file:
         path: "{{ drupal_core_path }}"

@@ -3,26 +3,33 @@
   become: yes
 
   vars_files:
-    - config.yml
+    - default.config.yml
 
   pre_tasks:
+    - name: Include config override file, if it exists.
+      include_vars: "{{ item }}"
+      with_fileglob:
+        - config.yml
+
     - name: Include source install vars if configured.
       include_vars: vars/source-install.yml
       when: pi_install_php_from_source
 
-    - include: tasks/init.yml
+    - import_tasks: tasks/init.yml
 
   roles:
+    - geerlingguy.security
     - geerlingguy.firewall
     - geerlingguy.git
     - geerlingguy.nginx
     - geerlingguy.mysql
     - geerlingguy.php-versions
     - geerlingguy.php
-    - { role: "geerlingguy.php-mysql", when: "not pi_install_php_from_source" }
+    - role: geerlingguy.php-mysql
+      when: not pi_install_php_from_source
     - geerlingguy.composer
     - geerlingguy.drush
-    - geerlingguy.security
+    - geerlingguy.drupal
 
   tasks:
     - name: Copy vhost configuration into place.
@@ -31,16 +38,3 @@
         dest: /etc/nginx/sites-enabled/drupal.conf
         mode: 0644
       notify: restart nginx
-
-    - name: Ensure dependencies are installed.
-      apt: "name={{ item }} state=present"
-      with_items:
-        # Needed to complete Drupal installation.
-        - sendmail-bin
-        - sendmail
-        # So drush can connect to MySQL.
-        - mysql-client
-        # For some flavors of Debian without cron installed by default.
-        - cron
-
-    - include: tasks/drupal.yml

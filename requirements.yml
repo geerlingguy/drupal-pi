@@ -1,6 +1,7 @@
 ---
 - src: geerlingguy.composer
 - src: geerlingguy.drush
+- src: geerlingguy.drupal
 - src: geerlingguy.firewall
 - src: geerlingguy.git
 - src: geerlingguy.mysql

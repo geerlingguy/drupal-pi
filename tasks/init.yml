@@ -1,6 +1,6 @@
 ---
 - name: Update apt cache if needed.
-  apt: update_cache=yes cache_valid_time=86400
+  apt: update_cache=true cache_valid_time=86400
 
 - name: Ensure /usr/local/bin exists.
   file:
@@ -9,8 +9,14 @@
     mode: 0775
 
 - name: Ensure dependencies are installed.
-  apt: name={{ item }} state=present
-  with_items:
-    - curl
-    - openssh-server
-    - openssh-client
+  apt:
+    name:
+      - curl
+      - openssh-server
+      - openssh-client
+      # Needed to complete Drupal installation.
+      - sendmail-bin
+      - sendmail
+      # For some flavors of Debian without cron installed by default.
+      - cron
+    state: present
