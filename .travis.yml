@@ -14,10 +14,6 @@ script:
   # Copy inventory file into place.
   - 'docker exec drupalpi cp ${PLAYBOOK_DIR}/example.inventory ${PLAYBOOK_DIR}/inventory'
 
-  # Run ansible-lint.
-  # - 'docker exec drupalpi pip install ansible-lint'
-  # - 'docker exec drupalpi ansible-lint ${PLAYBOOK_DIR}/main.yml'
-
   # Install requirements.
   - 'docker exec --tty drupalpi ansible-galaxy install -r ${PLAYBOOK_DIR}/requirements.yml'
 
@@ -28,7 +24,6 @@ script:
   - 'docker exec drupalpi env ANSIBLE_FORCE_COLOR=true ansible-playbook -i ${PLAYBOOK_DIR}/inventory --connection=local ${PLAYBOOK_DIR}/main.yml'
 
   # Run integration tests.
-  - docker exec drupalpi curl -s --header Host:${HOSTNAME} localhost
   - >
     docker exec drupalpi curl -s --header Host:${HOSTNAME} localhost
     | tee /tmp/drupalpi-curl-output
