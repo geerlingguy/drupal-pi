@@ -10,7 +10,8 @@ drupal_domain: "www.drupalpi.test"
 drupal_site_canonical_uri: "{{ drupal_domain }}"
 drupal_site_redirect_uri: "drupalpi.test"
 
-drupal_core_path: /var/www/drupal
+drupal_deploy_dir: /var/www/drupal
+drupal_core_path: "{{ drupal_deploy_dir }}/web"
 drupal_db_user: drupal
 drupal_db_password: supersecure
 drupal_db_name: drupal

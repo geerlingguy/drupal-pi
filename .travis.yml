@@ -5,34 +5,33 @@ env:
   global:
     - HOSTNAME: www.drupalpi.test
       MACHINE_NAME: drupalpi
-      DRUPAL_DIR: /var/www/drupal
+      PLAYBOOK_DIR: /tmp/drupal-pi
 
 script:
-  # Run container in detached state and store the id.
-  - 'tmpfile=$(mktemp)'
-  - 'docker run --detach --add-host "${HOSTNAME}$(echo -e "\t")${MACHINE_NAME}":127.0.0.1 --volume="${PWD}":${DRUPAL_DIR}/:rw --privileged --volume=/var/lib/docker --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro geerlingguy/docker-debian9-ansible:latest /lib/systemd/systemd > "${tmpfile}"'
-  - 'container_id=$(cat ${tmpfile})'
+  # Run container in detached state.
+  - 'docker run --detach --name drupalpi --add-host "${HOSTNAME}$(echo -e "\t")${MACHINE_NAME}":127.0.0.1 --volume="${PWD}":${PLAYBOOK_DIR}/:rw --privileged --volume=/var/lib/docker --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro geerlingguy/docker-debian9-ansible:latest /lib/systemd/systemd'
 
   # Copy inventory file into place.
-  - 'docker exec ${container_id} cp ${DRUPAL_DIR}/example.inventory ${DRUPAL_DIR}/inventory'
+  - 'docker exec drupalpi cp ${PLAYBOOK_DIR}/example.inventory ${PLAYBOOK_DIR}/inventory'
 
   # Run ansible-lint.
-  # - 'docker exec ${container_id} pip install ansible-lint'
-  # - 'docker exec ${container_id} ansible-lint ${DRUPAL_DIR}/main.yml'
+  # - 'docker exec drupalpi pip install ansible-lint'
+  # - 'docker exec drupalpi ansible-lint ${PLAYBOOK_DIR}/main.yml'
 
   # Install requirements.
-  - 'docker exec --tty ${container_id} ansible-galaxy install -r ${DRUPAL_DIR}/requirements.yml'
+  - 'docker exec --tty drupalpi ansible-galaxy install -r ${PLAYBOOK_DIR}/requirements.yml'
 
   # Ansible syntax check.
-  - 'docker exec --tty ${container_id} ansible-playbook ${DRUPAL_DIR}/main.yml --syntax-check'
+  - 'docker exec --tty drupalpi ansible-playbook ${PLAYBOOK_DIR}/main.yml --syntax-check'
 
   # Run the playbook with ansible-playbook.
-  - 'docker exec ${container_id} env ANSIBLE_FORCE_COLOR=true ansible-playbook -i ${DRUPAL_DIR}/inventory --connection=local ${DRUPAL_DIR}/main.yml'
+  - 'docker exec drupalpi env ANSIBLE_FORCE_COLOR=true ansible-playbook -i ${PLAYBOOK_DIR}/inventory --connection=local ${PLAYBOOK_DIR}/main.yml'
 
   # Run integration tests.
-  - docker exec ${container_id} curl -s --header Host:${HOSTNAME} localhost
+  - docker exec drupalpi curl -s --header Host:${HOSTNAME} localhost
   - >
-    docker exec ${container_id} curl -s --header Host:${HOSTNAME} localhost
+    docker exec drupalpi curl -s --header Host:${HOSTNAME} localhost
+    | tee /tmp/drupalpi-curl-output
     | grep -q 'Drupal Pi'
     && (echo 'Drupal install pass' && exit 0)
-    || (echo 'Drupal install fail' && exit 1)
+    || (echo 'Drupal install fail' && cat /tmp/drupalpi-curl-output && exit 1)
