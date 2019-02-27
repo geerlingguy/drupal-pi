@@ -1,5 +1,6 @@
 ---
 - src: geerlingguy.security
 - src: geerlingguy.firewall
+- src: geerlingguy.git
 - src: geerlingguy.nginx
 - src: geerlingguy.docker_arm

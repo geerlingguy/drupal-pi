@@ -11,15 +11,30 @@
       with_fileglob:
         - config.yml
 
+    - name: Include hook-pre-tasks.yml if it exists.
+      include_tasks: "{{ item }}"
+      with_first_found:
+        - files:
+            - hook-pre-tasks.yml
+          skip: true
+
     - import_tasks: tasks/init.yml
 
   roles:
     - geerlingguy.security
     - geerlingguy.firewall
+    - geerlingguy.git
     - geerlingguy.nginx
     - geerlingguy.docker_arm
 
   tasks:
+    - name: Include hook-tasks.yml if it exists.
+      include_tasks: "{{ item }}"
+      with_first_found:
+        - files:
+            - hook-tasks.yml
+          skip: true
+
     - import_tasks: tasks/docker-compose-setup.yml
 
     - name: Copy vhost configuration into place.

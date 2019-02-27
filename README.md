@@ -82,6 +82,13 @@ You can run the Ansible playbook from another host (instead of from within the V
 
 Note: If you have a headless Raspberry Pi and would like to find it's IP address, one way of doing so is to use a tool like [Fing](https://www.fingbox.com/features)).
 
+## Adding your own Ansible tasks
+
+If you need to add some additional automation, there is a concept of 'hook' files which will get called at different stages of the build if they are present (in the root directory of this project):
+
+  - `hook-pre-tasks.yml`: TODO
+  - `hook-tasks.yml`: TODO
+
 ## Updating your Pi (for future versions of Drupal Pi)
 
 If you need to update Drupal Pi, do the following:

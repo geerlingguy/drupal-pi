@@ -27,5 +27,6 @@ services:
       MYSQL_PASSWORD: '{{ drupal_database_password }}'
     ports:
       - "3306:3306"
+    restart: always
     volumes:
       - /var/lib/mysql

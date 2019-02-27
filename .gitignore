@@ -1,4 +1,7 @@
 *.retry
+.vagrant
 inventory
 config.yml
+hook-pre-tasks.yml
+hook-tasks.yml
 roles/*
