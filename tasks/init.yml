@@ -20,9 +20,6 @@
       - curl
       - openssh-server
       - openssh-client
-      # Needed to complete Drupal installation.
-      - sendmail-bin
-      - sendmail
       # For some flavors of Debian without cron installed by default.
       - cron
     state: present

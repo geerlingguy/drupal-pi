@@ -1,32 +1,18 @@
 ---
 # Raspberry Pi configuration.
 drupal_pi_processor_count: 4
-pi_install_php_from_source: false
+
+# Security configuration.
+security_sudoers_passwordless: ['pi']
+firewall_allowed_tcp_ports:
+  - 22
+  - 80
+  - 443
 
 # Drupal configuration.
-drupal_install_site: true
-drupal_site_name: "Drupal Pi"
-drupal_domain: "www.drupalpi.test"
-drupal_site_canonical_uri: "{{ drupal_domain }}"
-drupal_site_redirect_uri: "drupalpi.test"
-
-drupal_deploy_dir: /var/www/drupal
-drupal_core_path: "{{ drupal_deploy_dir }}/web"
-drupal_db_user: drupal
-drupal_db_password: supersecure
-drupal_db_name: drupal
-
+drupal_database_password: supersecure
 drupal_account_name: admin
 drupal_account_pass: admin
-
-# The following configuration builds a new Drupal 8 site. Look up the role
-# documentation for geerlingguy.drupal for instructions building via Drush make
-# or deploying an existing Drupal codebase.
-drupal_build_makefile: false
-drupal_build_composer: false
-drupal_build_composer_project: true
-drupal_composer_project_package: "drupal-composer/drupal-project:8.x-dev"
-drupal_composer_project_options: "--prefer-dist --stability dev --no-interaction"
 
 # Nginx configuration.
 nginx_worker_processes: "{{ drupal_pi_processor_count }}"
@@ -36,58 +22,3 @@ nginx_keepalive_timeout: "65"
 nginx_remove_default_vhost: true
 nginx_vhosts: []
 nginx_access_log: "off"
-
-# MySQL configuration.
-mysql_key_buffer_size: "16M"
-mysql_max_allowed_packet: "64M"
-mysql_table_open_cache: "256"
-mysql_sort_buffer_size: "1M"
-mysql_read_buffer_size: "1M"
-mysql_read_rnd_buffer_size: "2M"
-mysql_myisam_sort_buffer_size: "16M"
-mysql_thread_cache_size: "25"
-mysql_query_cache_size: "16M"
-mysql_innodb_buffer_pool_size: "64M"
-mysql_innodb_log_file_size: "8M"
-mysql_innodb_log_buffer_size: "4M"
-mysql_innodb_flush_log_at_trx_commit: "2"
-mysql_root_password: supersecure
-mysql_users:
-  - name: "{{ drupal_db_user }}"
-    host: "%"
-    password: "{{ drupal_db_password }}"
-    priv: "{{ drupal_db_name }}.*:ALL"
-
-mysql_databases:
-  - name: "{{ drupal_db_name }}"
-    collation: utf8_general_ci
-    encoding: utf8
-    replicate: 0
-
-# PHP version configuration.
-php_version: "7.1"
-
-# PHP configuration.
-php_webserver_daemon: "nginx"
-php_enable_php_fpm: true
-php_memory_limit: "128M"
-php_max_execution_time: "240"
-php_opcache_enabled_in_ini: true
-php_opcache_memory_consumption: "128"
-php_fpm_listen: "127.0.0.1:9000"
-php_fpm_listen_allowed_clients: "127.0.0.1"
-php_fpm_pm_max_children: 7
-php_fpm_pm_start_servers: 4
-php_fpm_pm_min_spare_servers: 2
-php_fpm_pm_max_spare_servers: 4
-
-# Uncomment for Raspbian on Raspberry Pi.
-php_source_install_gmp_path: "/usr/include/arm-linux-gnueabihf/gmp.h"
-# Uncomment for ODROBIAN on ODROID-C2.
-# php_source_install_gmp_path: "/usr/include/aarch64-linux-gnu/gmp.h"
-
-# Security configuration.
-security_sudoers_passwordless: ['pi']
-firewall_allowed_tcp_ports:
-  - 22
-  - 80

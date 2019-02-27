@@ -14,7 +14,7 @@ This playbook/project makes setting up Drupal on a _single_ Raspberry Pi a very 
 
 Drupal requires as good a Raspberry Pi as you can afford. While Drupal will run okay on any Raspberry Pi, it's best to use a B model 2 B or later (newer models have a snappy four-core processor and at least 1GB RAM).
 
-Once you have your Raspberry Pi and a good microSD card (the fastest/best one you can get—see [microSD Card Benchmarks](http://www.pidramble.com/wiki/benchmarks/microsd-cards)!), you will need to do a few things to set up the Raspberry Pi and get it ready to run the Drupal installation playbook.
+Once you have your Raspberry Pi and a good microSD card (the fastest/best one you can get—see [microSD Card Benchmarks](http://www.pidramble.com/wiki/benchmarks/microsd-cards)!), you will need to do a few things to set up the Raspberry Pi and get it ready to run Drupal.
 
 ### Set up on Raspberry Pi with Raspbian / GUI
 
@@ -59,7 +59,7 @@ These directions assume you're working either directly on your Raspberry Pi, run
 
 You need to download this repository to the Pi and run the included playbook to install and configure everything.
 
-  1. Clone the `drupal-pi` project: `git clone https://github.com/geerlingguy/drupal-pi.git && cd drupal-pi`
+  1. Clone the `drupal-pi` project: `git clone --branch docker https://github.com/geerlingguy/drupal-pi.git && cd drupal-pi`
   1. Copy `example.inventory` to `inventory`.
   1. (Optional) Create a `config.yml` and override any settings from `default.config.yml` as needed.
   1. Install required Ansible roles: `ansible-galaxy install -r requirements.yml`
@@ -69,7 +69,7 @@ After a few minutes, the playbook should complete successfully, and you should h
 
 To be able to access the site from other computers on your network (e.g. by accessing `http://www.drupalpi.test/`, [add an entry to your local hosts file](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file) like `[ip-of-raspberry-pi]  www.drupalpi.test`.
 
-> **NOTE**: For best security, you should create a `config.yml` file and at least override any `password` settings from the `default.config.yml` file (e.g. `mysql_root_password` and `drupal_db_password`).
+> **NOTE**: For best security, you should create a `config.yml` file and at least override any `password` settings from the `default.config.yml` file (e.g. `drupal_database_password`).
 
 ### Installing using another host with Ansible installed
 

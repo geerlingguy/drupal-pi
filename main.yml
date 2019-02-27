@@ -11,10 +11,6 @@
       with_fileglob:
         - config.yml
 
-    - name: Include source install vars if configured.
-      include_vars: vars/source-install.yml
-      when: pi_install_php_from_source
-
     - import_tasks: tasks/init.yml
 
   roles:
@@ -22,14 +18,7 @@
     - geerlingguy.firewall
     - geerlingguy.git
     - geerlingguy.nginx
-    - geerlingguy.mysql
-    - geerlingguy.php-versions
-    - geerlingguy.php
-    - role: geerlingguy.php-mysql
-      when: not pi_install_php_from_source
-    - geerlingguy.composer
-    - geerlingguy.drush
-    - geerlingguy.drupal
+    - geerlingguy.docker_arm
 
   tasks:
     - name: Copy vhost configuration into place.
