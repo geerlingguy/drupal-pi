@@ -18,7 +18,7 @@ script:
   - 'docker exec --tty drupalpi ansible-galaxy install -r ${PLAYBOOK_DIR}/requirements.yml'
 
   # Ansible syntax check.
-  - 'docker exec --tty drupalpi ansible-playbook ${PLAYBOOK_DIR}/main.yml --syntax-check'
+  - 'docker exec --tty drupalpi ansible-playbook -i ${PLAYBOOK_DIR}/inventory ${PLAYBOOK_DIR}/main.yml --syntax-check'
 
   # Run the playbook with ansible-playbook.
   - >
