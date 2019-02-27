@@ -20,6 +20,8 @@
     - geerlingguy.docker_arm
 
   tasks:
+    - import_tasks: tasks/docker-compose-setup.yml
+
     - name: Copy vhost configuration into place.
       template:
         src: templates/drupal.conf.j2

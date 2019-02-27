@@ -1,0 +1,31 @@
+---
+version: '3'
+
+services:
+  drupal:
+    image: {{ drupal_docker_image }}
+    container_name: drupal
+    environment:
+      DRUPAL_DATABASE_HOST: 'mysql'
+      DRUPAL_DATABASE_PORT: '3306'
+      DRUPAL_DATABASE_NAME: 'drupal'
+      DRUPAL_DATABASE_USERNAME: 'drupal'
+      DRUPAL_DATABASE_PASSWORD: '{{ drupal_database_password }}'
+      DRUPAL_HASH_SALT: '{{ drupal_hash_salt }}'
+      DRUPAL_DOWNLOAD_IF_NOT_PRESENT: '{{ drupal_download_if_not_present }}'
+    ports:
+      - "8080:80"
+    restart: always
+
+  mysql:
+    image: {{ mysql_docker_image }}
+    container_name: drupal-mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_DATABASE: drupal
+      MYSQL_USER: drupal
+      MYSQL_PASSWORD: '{{ drupal_database_password }}'
+    ports:
+      - "3306:3306"
+    volumes:
+      - /var/lib/mysql

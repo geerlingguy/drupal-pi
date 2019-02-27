@@ -1,6 +1,7 @@
 ---
 # Raspberry Pi configuration.
 drupal_pi_processor_count: 4
+drupal_pi_app_directory: /opt/drupal-pi
 
 # Security configuration.
 security_sudoers_passwordless: ['pi']
@@ -10,9 +11,16 @@ firewall_allowed_tcp_ports:
   - 443
 
 # Drupal configuration.
+drupal_url: www.drupalpi.test
+drupal_docker_image: 'geerlingguy/drupal:latest'
 drupal_database_password: supersecure
+drupal_hash_salt: JcWFc2Z29LQIAeorS0IL9qB4SxOCjiYMd909AM3E2U
 drupal_account_name: admin
 drupal_account_pass: admin
+drupal_download_if_not_present: 'true'
+
+# MySQL configuration.
+mysql_docker_image: 'mysql:5.7'
 
 # Nginx configuration.
 nginx_worker_processes: "{{ drupal_pi_processor_count }}"

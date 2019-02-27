@@ -1,74 +1,13 @@
 server {
-    listen       80;
-    server_name  {{ drupal_site_redirect_uri }};
-    return       301 http://{{ drupal_site_canonical_uri }}$request_uri;
-}
-
-server {
-    listen 80;
-    server_name {{ inventory_hostname }} {{ drupal_site_canonical_uri }};
-    root {{ drupal_core_path }};
+    listen       80 default;
+    server_name  {{ drupal_url }};
 
     gzip on;
     gzip_static on;
 
     access_log {{ nginx_access_log }};
 
-    location ~ \..*/.*\.php$ {
-        return 403;
-    }
-
-    location ~ (^|/)\. {
-        return 403;
-    }
-
     location / {
-        # Don't touch PHP for static content.
-        try_files $uri /index.php?$query_string;
-    }
-
-    # Don't allow direct access to PHP files in the vendor directory.
-    location ~ /vendor/.*\.php$ {
-        deny all;
-        return 404;
-    }
-
-    # Redirect common PHP files to their new locations.
-    location ~ ^((?!.*(?:core)).*)/(install.php|rebuild.php) {
-         return 301 $scheme://$host$1/core/$2$is_args$args;
-    }
-
-    location ~ \.php$ {
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_param SCRIPT_FILENAME $request_filename;
-        fastcgi_intercept_errors on;
-        fastcgi_pass 127.0.0.1:9000;
-        fastcgi_read_timeout 240s;
-        include fastcgi_params;
-        add_header X-Backend-Server $hostname;
-    }
-
-    location @rewrite {
-        rewrite ^ /index.php;
-    }
-
-    location ~ ^/sites/.*/files/styles/ {
-        try_files $uri @rewrite;
-    }
-
-    location = /favicon.ico {
-        log_not_found off;
-        access_log off;
-    }
-
-    location = /robots.txt {
-        allow all;
-        log_not_found off;
-        access_log off;
-    }
-
-    location ~* \.(jpg|jpeg|gif|css|png|js|ico|eot|svg|ttf|woff)$ {
-        expires max;
-        log_not_found off;
+        proxy_pass http://127.0.0.1:8080/;
     }
 }
