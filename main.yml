@@ -16,7 +16,6 @@
   roles:
     - geerlingguy.security
     - geerlingguy.firewall
-    - geerlingguy.git
     - geerlingguy.nginx
     - geerlingguy.docker_arm
 
