@@ -23,7 +23,7 @@ services:
     image: {{ mysql_docker_image }}
     container_name: drupal-mysql
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_ROOT_PASSWORD: '{{ mysql_root_password }}'
       MYSQL_DATABASE: drupal
       MYSQL_USER: drupal
       MYSQL_PASSWORD: '{{ drupal_database_password }}'

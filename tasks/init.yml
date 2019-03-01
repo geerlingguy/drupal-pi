@@ -23,3 +23,17 @@
       # For some flavors of Debian without cron installed by default.
       - cron
     state: present
+
+- name: Override Drupal Docker image if not on ARM and default is set.
+  set_fact:
+    drupal_docker_image: 'geerlingguy/drupal:latest'
+  when:
+    - ansible_architecture is not search('arm')
+    - drupal_docker_image == 'geerlingguy/drupal:latest-arm32v7'
+
+- name: Override MySQL Docker image if not on ARM and default is set.
+  set_fact:
+    mysql_docker_image: 'mysql:5.7'
+  when:
+    - ansible_architecture is not search('arm')
+    - mysql_docker_image == 'hypriot/rpi-mysql:5.5'

@@ -12,7 +12,7 @@ firewall_allowed_tcp_ports:
 
 # Drupal configuration.
 drupal_url: www.drupalpi.test
-drupal_docker_image: 'geerlingguy/drupal:latest'
+drupal_docker_image: 'geerlingguy/drupal:latest-arm32v7'
 drupal_files_directory_host: /var/drupal/files
 drupal_files_directory_container: /var/www/html/sites/default/files
 drupal_files_directory_owner: 33
@@ -23,7 +23,8 @@ drupal_account_pass: admin
 drupal_download_if_not_present: 'true'
 
 # MySQL configuration.
-mysql_docker_image: 'mysql:5.7'
+mysql_docker_image: 'hypriot/rpi-mysql:5.5'
+mysql_root_password: rootpasswordhere
 
 # Nginx configuration.
 nginx_worker_processes: "{{ drupal_pi_processor_count }}"

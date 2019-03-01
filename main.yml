@@ -25,6 +25,7 @@
     - geerlingguy.firewall
     - geerlingguy.git
     - geerlingguy.nginx
+    - geerlingguy.pip
     - geerlingguy.docker_arm
 
   tasks:
