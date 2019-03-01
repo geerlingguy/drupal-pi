@@ -27,7 +27,7 @@ These directions assume you're working directly on your Raspberry Pi, running Ra
   1. Once Raspbian is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
   1. Boot up the Raspberry Pi. Once booted, open the "Raspberry Pi Configuration" tool in Menu > Preferences.
      1. Change the pi user account password.
-     2. Click OK, then reboot the Raspberry Pi.
+     1. Click OK, then reboot the Raspberry Pi.
   1. Once rebooted, connect the Pi to your local network either via WiFi or wired ethernet.
   1. Open the Terminal application (in the launcher or in Menu > Accessories > Terminal).
   1. Install Ansible: `sudo apt-get update && sudo apt-get install -y python-dev python-pip libffi-dev && sudo pip install ansible`
@@ -50,7 +50,7 @@ These directions assume you're working either directly on your Raspberry Pi, run
      1. Scroll down to 'Finished', hit return, and reboot the Raspberry Pi.
   1. Once rebooted, connect the Pi to your local network either via [WiFi](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/setting-up-wifi-with-occidentalis) or wired ethernet.
   1. Log back in (either on the Pi directly or via SSH).q
-  7. Install Git and Ansible: `sudo apt-get update && sudo apt-get install -y python-dev python-pip libffi-dev git && sudo pip install ansible`
+  1. Install Git and Ansible: `sudo apt-get update && sudo apt-get install -y python-dev python-pip libffi-dev git && sudo pip install ansible`
   1. Test the Ansible installation: `ansible --version` (should output the Ansible version).
 
 ## Install LEMP software stack and Drupal
@@ -82,25 +82,29 @@ You can run the Ansible playbook from another host (instead of from within the V
 
 Note: If you have a headless Raspberry Pi and would like to find it's IP address, one way of doing so is to use a tool like [Fing](https://www.fingbox.com/features)).
 
-## Adding your own Ansible tasks
+## Advanced Usage
+
+### Adding your own Ansible tasks
 
 If you need to add some additional automation, there is a concept of 'hook' files which will get called at different stages of the build if they are present (in the root directory of this project):
 
-  - `hook-pre-tasks.yml`: TODO
-  - `hook-tasks.yml`: TODO
+  - `hook-pre-tasks.yml`: Gets called in the pre_tasks section of the playbook before any Ansible roles or tasks are applied.
+  - `hook-tasks.yml`: Gets called at the start of the tasks section of the playbook (after roles are applied).
 
-## Updating your Pi (for future versions of Drupal Pi)
+One use of these hooks would be to do extra steps to deploy your _own_ container and codebase, without having to use a private registry. See an example which I use to build and deploy one of my Drupal codebases: [`hook-tasks.yml` example for Drupal for Kubernetes](https://github.com/geerlingguy/drupal-pi/issues/36#issuecomment-468519984).
+
+### Updating your Pi (for future versions of Drupal Pi)
 
 If you need to update Drupal Pi, do the following:
 
   1. cd into the project directory: `cd /path/to/drupal-pi`
-  2. Pull the latest changes: `git pull`
-  3. Update all required Ansible roles (and install new ones): `sudo ansible-galaxy install -r requirements.yml --force`
-  4. Run the Ansible playbook: `ansible-playbook -i inventory -c local main.yml`
+  1. Pull the latest changes: `git pull`
+  1. Update all required Ansible roles (and install new ones): `sudo ansible-galaxy install -r requirements.yml --force`
+  1. Run the Ansible playbook: `ansible-playbook -i inventory -c local main.yml`
 
 _Note_: Remove `-c local` if running from another host.
 
-## Resetting the Drupal Install
+### Resetting the Drupal Install
 
 There is a `reset.yml` playbook included that will reset the environment so you can install a fresh copy of Drupal. To run the playbook, enter the following command in the same directory as this README:
 
@@ -109,6 +113,12 @@ There is a `reset.yml` playbook included that will reset the environment so you 
 _Note_: Remove `-c local` if running from another host.
 
 After it finishes resetting the environment, you can run the `main.yml` playbook again to rebuild the Drupal site.
+
+### Using Drupal Pi as a load balancer for Pi Dramble
+
+This project can also switch from running a site locally to being used as a load balancer for the Pi Dramble Cluster. All you have to do is set `nginx_use_as_lb: true` in your `config.yml`, make sure all the Pis which are responding to requests are in the `nginx_lb_backends` list, and run the playbook to redeploy the Nginx configuration.
+
+Then point the domain you would normally point at the Pi Dramble cluster (e.g. `cluster.pidramble.test`) at the IP of the single Drupal Pi instead!
 
 ## Author
 

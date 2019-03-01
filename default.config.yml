@@ -34,3 +34,10 @@ nginx_remove_default_vhost: true
 nginx_vhosts: []
 nginx_proxy_pass: http://127.0.0.1:8080/
 nginx_access_log: "off"
+
+# Nginx load balancing configuration (disabled by default).
+nginx_use_as_lb: false
+nginx_lb_backends:
+  - '10.0.100.62'
+  - '10.0.100.63'
+  - '10.0.100.64'

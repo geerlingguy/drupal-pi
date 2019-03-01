@@ -1,3 +1,5 @@
+{% if not nginx_use_as_lb %}
+{# Normal configuration for single Drupal Pi. #}
 server {
     listen       80 default;
     server_name  {{ drupal_url }};
@@ -11,3 +13,21 @@ server {
         proxy_pass {{ nginx_proxy_pass }};
     }
 }
+{% else %}
+{# Configuration for using Drupal Pis as load balancer for Pi Dramble. #}
+upstream backend {
+{% for host in nginx_lb_backends %}
+    server {{ host }} max_fails=3;
+{% endfor %}
+}
+
+server {
+   listen 80 default;
+
+   location / {
+        proxy_pass http://backend;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $remote_addr;
+   }
+}
+{% endif %}
