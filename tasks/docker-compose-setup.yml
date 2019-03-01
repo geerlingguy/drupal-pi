@@ -4,6 +4,13 @@
     path: "{{ drupal_pi_app_directory }}"
     state: directory
 
+- name: Ensure Drupal files directory exists.
+  file:
+    path: "{{ drupal_files_directory_host }}"
+    state: directory
+    owner: "{{ drupal_files_directory_owner }}"
+    group: "{{ drupal_files_directory_owner }}"
+
 - name: Ensure Docker Compose file is present.
   template:
     src: templates/docker-compose.yml.j2

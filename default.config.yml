@@ -13,6 +13,9 @@ firewall_allowed_tcp_ports:
 # Drupal configuration.
 drupal_url: www.drupalpi.test
 drupal_docker_image: 'geerlingguy/drupal:latest'
+drupal_files_directory_host: /var/drupal/files
+drupal_files_directory_container: /var/www/html/sites/default/files
+drupal_files_directory_owner: 33
 drupal_database_password: supersecure
 drupal_hash_salt: JcWFc2Z29LQIAeorS0IL9qB4SxOCjiYMd909AM3E2U
 drupal_account_name: admin
