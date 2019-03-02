@@ -3,30 +3,28 @@
   become: yes
 
   vars_files:
-    - config.yml
+    - default.config.yml
 
   tasks:
-    # TODO: This may not work post-Issue #21. Update it.
-    - name: Ensure Drupal site codebase is removed.
-      file:
-        path: "{{ drupal_core_path }}"
-        state: absent
-      notify: restart services
+    - name: Include config override file, if it exists.
+      include_vars: "{{ item }}"
+      with_fileglob:
+        - config.yml
 
-    - name: Ensure Drupal database is dropped.
-      mysql_db:
-        name: drupal
-        state: absent
-      notify: restart services
+    - name: Completely destroy docker-compose environment.
+      command: >
+        docker-compose down -v
+        chdir={{ drupal_pi_app_directory }}
 
-    - name: Test.
-      command: "which git"
-      notify: restart services
+    - name: Delete the contents of the host Drupal files directory.
+      shell: >
+        rm -rf {{ drupal_files_directory_host }}/*
+        warn=false
+      changed_when: true
 
-  handlers:
-    - name: restart services
-      service: "name={{ item }} state=restarted"
-      with_items:
-        - nginx
-        - "{{ 'php-fpm' if pi_install_php_from_source else 'php7.0-fpm' }}"
-        - mysql
+    # Can't use docker_service module until the following issue is resolved:
+    # https://github.com/ansible/ansible/issues/26937
+    - name: Rebuild the docker-compose environment.
+      command: >
+        docker-compose up -d --remove-orphans
+        chdir={{ drupal_pi_app_directory }}

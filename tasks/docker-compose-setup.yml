@@ -1,0 +1,32 @@
+---
+- name: Ensure Drupal Pi app directory exists.
+  file:
+    path: "{{ drupal_pi_app_directory }}"
+    state: directory
+
+- name: Ensure Drupal files directory exists.
+  file:
+    path: "{{ drupal_files_directory_host }}"
+    state: directory
+    owner: "{{ drupal_files_directory_owner }}"
+    group: "{{ drupal_files_directory_owner }}"
+
+- name: Ensure Docker Compose file is present.
+  template:
+    src: templates/docker-compose.yml.j2
+    dest: "{{ drupal_pi_app_directory }}/docker-compose.yml"
+    mode: 0644
+  register: docker_compose_file_result
+
+- name: Stop all Docker containers if docker-compose.yml has changed.
+  command: >
+    docker-compose stop
+    chdir={{ drupal_pi_app_directory }}
+  when: docker_compose_file_result.changed
+
+# Can't use docker_service module until the following issue is resolved:
+# https://github.com/ansible/ansible/issues/26937
+- name: Bring up the Docker containers.
+  command: >
+    docker-compose up -d --remove-orphans
+    chdir={{ drupal_pi_app_directory }}

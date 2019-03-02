@@ -11,9 +11,12 @@
       with_fileglob:
         - config.yml
 
-    - name: Include source install vars if configured.
-      include_vars: vars/source-install.yml
-      when: pi_install_php_from_source
+    - name: Include hook-pre-tasks.yml if it exists.
+      include_tasks: "{{ item }}"
+      with_first_found:
+        - files:
+            - hook-pre-tasks.yml
+          skip: true
 
     - import_tasks: tasks/init.yml
 
@@ -22,16 +25,19 @@
     - geerlingguy.firewall
     - geerlingguy.git
     - geerlingguy.nginx
-    - geerlingguy.mysql
-    - geerlingguy.php-versions
-    - geerlingguy.php
-    - role: geerlingguy.php-mysql
-      when: not pi_install_php_from_source
-    - geerlingguy.composer
-    - geerlingguy.drush
-    - geerlingguy.drupal
+    - geerlingguy.pip
+    - geerlingguy.docker_arm
 
   tasks:
+    - name: Include hook-tasks.yml if it exists.
+      include_tasks: "{{ item }}"
+      with_first_found:
+        - files:
+            - hook-tasks.yml
+          skip: true
+
+    - import_tasks: tasks/docker-compose-setup.yml
+
     - name: Copy vhost configuration into place.
       template:
         src: templates/drupal.conf.j2
