@@ -1,3 +1,10 @@
+{% if nginx_proxy_cache %}
+map $http_cookie $drupal_logged_in {
+    default 0;
+    ~SESS 1;
+}
+{% endif %}
+
 {% if not nginx_use_as_lb %}
 {# Normal configuration for single Drupal Pi. #}
 server {
@@ -7,10 +14,16 @@ server {
     gzip on;
     gzip_static on;
 
+{% if nginx_proxy_cache %}
+    proxy_cache cache;
+    proxy_cache_key $scheme$host$uri$is_args$args;
+{% endif %}
+
     access_log {{ nginx_access_log }};
 
     location / {
         proxy_pass {{ nginx_proxy_pass }};
+        include /etc/nginx/conf.d/proxy.conf;
     }
 }
 {% else %}
@@ -24,10 +37,17 @@ upstream backend {
 server {
    listen 80 default;
 
+   gzip on;
+   gzip_static on;
+
+{% if nginx_proxy_cache %}
+    proxy_cache cache;
+    proxy_cache_key $scheme$host$uri$is_args$args;
+{% endif %}
+
    location / {
         proxy_pass http://backend;
-        proxy_set_header Host $host;
-        proxy_set_header X-Forwarded-For $remote_addr;
+        include /etc/nginx/conf.d/proxy.conf;
    }
 }
 {% endif %}

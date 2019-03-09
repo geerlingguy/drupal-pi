@@ -10,6 +10,7 @@
       include_vars: "{{ item }}"
       with_fileglob:
         - config.yml
+      tags: ['always']
 
     - name: Include hook-pre-tasks.yml if it exists.
       include_tasks: "{{ item }}"
@@ -17,6 +18,7 @@
         - files:
             - hook-pre-tasks.yml
           skip: true
+      tags: ['always']
 
     - import_tasks: tasks/init.yml
 
@@ -24,7 +26,8 @@
     - geerlingguy.security
     - geerlingguy.firewall
     - geerlingguy.git
-    - geerlingguy.nginx
+    - name: geerlingguy.nginx
+      tags: ['nginx']
     - geerlingguy.pip
     - geerlingguy.docker_arm
 
@@ -38,9 +41,15 @@
 
     - import_tasks: tasks/docker-compose-setup.yml
 
-    - name: Copy vhost configuration into place.
+    - name: Copy nginx configuration into place.
       template:
-        src: templates/drupal.conf.j2
-        dest: /etc/nginx/sites-enabled/drupal.conf
+        src: "templates/{{ item.src }}"
+        dest: "{{ item.dest }}"
         mode: 0644
       notify: restart nginx
+      with_items:
+        - src: proxy.conf.j2
+          dest: /etc/nginx/conf.d/proxy.conf
+        - src: drupal.conf.j2
+          dest: /etc/nginx/sites-enabled/drupal.conf
+      tags: ['nginx']

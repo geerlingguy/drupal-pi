@@ -114,6 +114,14 @@ _Note_: Remove `-c local` if running from another host.
 
 After it finishes resetting the environment, you can run the `main.yml` playbook again to rebuild the Drupal site.
 
+### Enabling Proxy Caching
+
+The Drupal Pi includes a basic proxy cache configuration which uses Nginx to reverse proxy and cache all requests which do not include a Drupal session cookie. This can increase the speed of page delivery by 60x or more, meaning your little Pi could serve up more traffic than most home Internet uplinks could handle!
+
+To enable Nginx's proxy cache, set the following value in your `config.yml` and run the main playbook:
+
+    nginx_proxy_cache: true
+
 ### Using Drupal Pi as a load balancer for Pi Dramble
 
 This project can also switch from running a site locally to being used as a load balancer for the Pi Dramble Cluster. All you have to do is set `nginx_use_as_lb: true` in your `config.yml`, make sure all the Pis which are responding to requests are in the `nginx_lb_backends` list, and run the playbook to redeploy the Nginx configuration.
