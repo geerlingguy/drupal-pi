@@ -18,6 +18,7 @@ drupal_files_directory_container: /var/www/html/sites/default/files
 drupal_files_directory_owner: 33
 drupal_database_password: supersecure
 drupal_hash_salt: JcWFc2Z29LQIAeorS0IL9qB4SxOCjiYMd909AM3E2U
+drupal_pidramble_analytics_enabled: 'false'
 drupal_account_name: admin
 drupal_account_pass: admin
 drupal_download_if_not_present: 'true'
