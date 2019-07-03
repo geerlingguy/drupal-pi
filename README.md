@@ -23,7 +23,7 @@ These directions assume you're working directly on your Raspberry Pi, running Ra
   1. Download the latest 'Raspbian' image from the [Raspberry Pi Downloads page](https://www.raspberrypi.org/downloads/)†.
   1. Follow the [image installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to transfer the image to your microSD card:
      1. Unmount the microSD card: `diskutil unmountDisk /dev/disk2`
-     1. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-stretch.img | sudo dd of=/dev/rdisk2 bs=1m`
+     1. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-stretch.img | sudo dd bs=1m of=/dev/rdisk2`
   1. Once Raspbian is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
   1. Boot up the Raspberry Pi. Once booted, open the "Raspberry Pi Configuration" tool in Menu > Preferences.
      1. Change the pi user account password.
@@ -42,7 +42,7 @@ These directions assume you're working either directly on your Raspberry Pi, run
   1. Download the latest 'Raspbian Lite' image from the [Raspberry Pi Downloads page](https://www.raspberrypi.org/downloads/)†.
   1. Follow the [image installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) to transfer the image to your microSD card:
      1. Unmount the microSD card: `diskutil unmountDisk /dev/disk2`
-     1. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-stretch-lite.img | sudo dd of=/dev/rdisk2 bs=1m`
+     1. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-stretch-lite.img | sudo dd bs=1m of=/dev/rdisk2`
      1. Ensure SSH is enabled by adding an 'ssh' file to the boot volume: `touch /Volumes/boot/ssh`
   1. Once Raspbian Lite is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
   1. Boot up the Raspberry Pi. Once booted, log in (default username is `pi` and default password is `raspberry`), and run `sudo raspi-config`.
