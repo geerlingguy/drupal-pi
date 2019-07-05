@@ -44,6 +44,20 @@ These directions assume you're working either directly on your Raspberry Pi, run
      1. Unmount the microSD card: `diskutil unmountDisk /dev/disk2`
      1. Write the image to the microSD card: `pv yyyy-mm-dd-raspbian-stretch-lite.img | sudo dd bs=1m of=/dev/rdisk2`
      1. Ensure SSH is enabled by adding an 'ssh' file to the boot volume: `touch /Volumes/boot/ssh`
+     1. If you need to enable WiFi headlessly, add a `wpa_supplicant.conf` file to the boot volume as well:
+        1. Create the file: `touch /Volumes/boot/wpa_supplicant.conf`
+        1. Add the contents:
+           ```
+           ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+           update_config=1
+           country=US
+
+           network={
+               ssid="your-network-name"
+               psk="your-network-password"
+               key_mgmt=WPA-PSK
+           }
+           ```
   1. Once Raspbian Lite is loaded on the card, insert the card in your Pi, and plug in your Pi to boot it up.
   1. Boot up the Raspberry Pi. Once booted, log in (default username is `pi` and default password is `raspberry`), and run `sudo raspi-config`.
      1. Set a better password for the Pi's default user account.
