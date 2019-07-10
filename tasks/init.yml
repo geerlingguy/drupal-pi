@@ -20,6 +20,8 @@
       - curl
       - openssh-server
       - openssh-client
+      - libffi-dev
+      - libssl-dev
       # For some flavors of Debian without cron installed by default.
       - cron
     state: present
