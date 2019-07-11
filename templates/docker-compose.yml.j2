@@ -13,6 +13,7 @@ services:
       DRUPAL_DATABASE_PASSWORD: '{{ drupal_database_password }}'
       DRUPAL_HASH_SALT: '{{ drupal_hash_salt }}'
       DRUPAL_DOWNLOAD_IF_NOT_PRESENT: '{{ drupal_download_if_not_present }}'
+      DRUPAL_DOWNLOAD_VERIFY_CERT: 'false'
       PIDRAMBLE_ANALYTICS_ENABLED: '{{ drupal_pidramble_analytics_enabled }}'
     volumes:
       - {{ drupal_files_directory_host }}:{{ drupal_files_directory_container }}:rw
