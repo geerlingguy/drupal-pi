@@ -73,7 +73,7 @@ These directions assume you're working either directly on your Raspberry Pi, run
 
 You need to download this repository to the Pi and run the included playbook to install and configure everything.
 
-  1. Clone the `drupal-pi` project: `git clone --branch docker https://github.com/geerlingguy/drupal-pi.git && cd drupal-pi`
+  1. Clone the `drupal-pi` project: `git clone https://github.com/geerlingguy/drupal-pi.git && cd drupal-pi`
   1. Copy `example.inventory` to `inventory`.
   1. (Optional) Create a `config.yml` and override any settings from `default.config.yml` as needed.
   1. Install required Ansible roles: `ansible-galaxy install -r requirements.yml`
