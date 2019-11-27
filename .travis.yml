@@ -9,7 +9,10 @@ env:
 
 script:
   # Run container in detached state.
-  - 'docker run --detach --name drupalpi --add-host "${HOSTNAME}$(echo -e "\t")${MACHINE_NAME}":127.0.0.1 --volume="${PWD}":${PLAYBOOK_DIR}/:rw --privileged --volume=/var/lib/docker --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro geerlingguy/docker-debian9-ansible:latest /lib/systemd/systemd'
+  - 'docker run --detach --name drupalpi --add-host "${HOSTNAME}$(echo -e "\t")${MACHINE_NAME}":127.0.0.1 --volume="${PWD}":${PLAYBOOK_DIR}/:rw --privileged --volume=/var/lib/docker --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro geerlingguy/docker-debian10-ansible:latest /lib/systemd/systemd'
+
+  # Install Python 3.
+  - 'docker exec drupalpi bash -c "apt update && apt install -y python3"'
 
   # Copy inventory file into place.
   - 'docker exec drupalpi cp ${PLAYBOOK_DIR}/example.inventory ${PLAYBOOK_DIR}/inventory'
