@@ -39,6 +39,11 @@ nginx_proxy_pass: http://127.0.0.1:8080/
 nginx_proxy_cache: false
 nginx_proxy_cache_path: "/var/cache/nginx keys_zone=cache:32m max_size=1g inactive=15m"
 
+# Python configuration.
+pip_package: python3-pip
+pip_executable: pip3
+docker_pip_executable: '{{ pip_executable }}'
+
 # Nginx load balancing configuration (disabled by default).
 nginx_use_as_lb: false
 nginx_lb_backends:

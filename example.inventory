@@ -1,7 +1,7 @@
 [pi]
-127.0.0.1
+127.0.0.1 ansible_python_interpreter=/usr/bin/python3
 
 # Comment the default localhost line above, and uncomment the line below
 # (replacing the IP with your Pi's IP address) if running the playbook from a
 # separate workstation.
-#10.0.1.20 ansible_user=pi
+#10.0.1.20 ansible_user=pi ansible_python_interpreter=/usr/bin/python3
