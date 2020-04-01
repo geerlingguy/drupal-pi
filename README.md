@@ -63,7 +63,7 @@ These directions assume you're working either directly on your Raspberry Pi, run
      1. Set a better password for the Pi's default user account.
      1. Scroll down to 'Finished', hit return, and reboot the Raspberry Pi.
   1. Once rebooted, connect the Pi to your local network either via [WiFi](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/setting-up-wifi-with-occidentalis) or wired ethernet.
-  1. Log back in (either on the Pi directly or via SSH).q
+  1. Log back in (either on the Pi directly or via SSH).
   1. Install Git and Ansible: `sudo apt-get update && sudo apt-get install -y python-dev python-pip libffi-dev git && sudo pip install ansible`
   1. Test the Ansible installation: `ansible --version` (should output the Ansible version).
 
