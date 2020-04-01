@@ -67,7 +67,7 @@ These directions assume you're working either directly on your Raspberry Pi, run
   1. Install Git and Ansible: `sudo apt-get update && sudo apt-get install -y python-dev python-pip libffi-dev git && sudo pip install ansible`
   1. Test the Ansible installation: `ansible --version` (should output the Ansible version).
 
-## Install LEMP software stack and Drupal
+## Install LEMP software stack and Drupal with Ansible and Docker
 
 ### Installing using the Raspberry Pi
 
