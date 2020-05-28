@@ -77,7 +77,7 @@ You need to download this repository to the Pi and run the included playbook to 
   1. Copy `example.inventory` to `inventory`.
   1. (Optional) Create a `config.yml` and override any settings from `default.config.yml` as needed.
   1. Install required Ansible roles: `ansible-galaxy install -r requirements.yml`
-  1. Run the Ansible playbook: `ansible-playbook -i inventory -c local main.yml`
+  1. Run the Ansible playbook: `ansible-playbook -c local main.yml`
 
 After a few minutes, the playbook should complete successfully, and you should have Drupal running on your Raspberry Pi, accessible via `http://localhost/`
 
@@ -92,7 +92,7 @@ You can run the Ansible playbook from another host (instead of from within the V
   1. Change the `inventory` file to use the Pi's IP address instead of `127.0.0.1`.
   1. Make sure you have your SSH private key configured for the `pi` account on the Pi (I use `ssh-copy-id` to copy my ID to the Pi).
   1. Install required Ansible roles: `ansible-galaxy install -r requirements.yml`
-  1. Run the Ansible playbook: `ansible-playbook -i inventory main.yml`
+  1. Run the Ansible playbook: `ansible-playbook main.yml`
 
 Note: If you have a headless Raspberry Pi and would like to find it's IP address, one way of doing so is to use a tool like [Fing](https://www.fingbox.com/features)).
 
