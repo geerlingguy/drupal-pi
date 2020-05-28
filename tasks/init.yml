@@ -36,7 +36,7 @@
 
 - name: Override MySQL Docker image if not on ARM and default is set.
   set_fact:
-    mysql_docker_image: 'mysql:5.7'
+    mysql_docker_image: 'mysql/mysql-server:8.0'
   when:
     - ansible_architecture is not search('arm')
     - mysql_docker_image == 'hypriot/rpi-mysql:5.5'
