@@ -27,16 +27,19 @@
       - cron
     state: present
 
-- name: Override Drupal Docker image if not on ARM and default is set.
+# TODO: We can eventually just default to geerlingguy/drupal:latest once this
+# issue is resolved: https://github.com/geerlingguy/drupal-container/issues/25
+- name: Override Drupal Docker image if not on arm and default is set.
   set_fact:
     drupal_docker_image: 'geerlingguy/drupal:latest'
   when:
-    - ansible_architecture is not search('arm')
-    - drupal_docker_image == 'geerlingguy/drupal:latest-arm32v7'
+    - ansible_architecture is not search('armv7')
+    - ansible_architecture is not search('aarch64')
+    - 'geerlingguy/drupal:latest-' in drupal_docker_image)
 
-- name: Override MySQL Docker image if not on ARM and default is set.
+- name: Override MySQL Docker image if not on armv7 and default is set.
   set_fact:
     mysql_docker_image: 'mysql/mysql-server:8.0'
   when:
-    - ansible_architecture is not search('arm')
+    - ansible_architecture is not search('armv7')
     - mysql_docker_image == 'hypriot/rpi-mysql:5.5'

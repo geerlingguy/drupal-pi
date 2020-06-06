@@ -12,7 +12,9 @@ firewall_allowed_tcp_ports:
 
 # Drupal configuration.
 drupal_url: www.drupalpi.test
-drupal_docker_image: 'geerlingguy/drupal:latest-arm32v7'
+drupal_docker_image_armv7: 'geerlingguy/drupal:latest-arm32v7'
+drupal_docker_image_arm64: 'geerlingguy/drupal:latest-arm64'
+docker_docker_image: "{{ drupal_docker_image_armv7 if 'armv7' in ansible_architecture else drupal_docker_image_arm64 }}"
 drupal_files_directory_host: /var/drupal/files
 drupal_files_directory_container: /var/www/html/sites/default/files
 drupal_files_directory_owner: "33"
