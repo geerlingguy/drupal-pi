@@ -29,6 +29,11 @@ services:
       MYSQL_DATABASE: drupal
       MYSQL_USER: drupal
       MYSQL_PASSWORD: '{{ drupal_database_password }}'
+
+      MARIADB_ROOT_PASSWORD: '{{ mysql_root_password }}'
+      MARIADB_DATABASE: drupal
+      MARIADB_USERNAME: drupal
+      MARIADB_PASSWORD: '{{ drupal_database_password }}'
     ports:
       - "3306:3306"
     restart: always
