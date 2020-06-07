@@ -35,11 +35,4 @@
   when:
     - ansible_architecture is not search('armv7')
     - ansible_architecture is not search('aarch64')
-    - 'geerlingguy/drupal:latest-' in drupal_docker_image)
-
-- name: Override MySQL Docker image if not on armv7 and default is set.
-  set_fact:
-    mysql_docker_image: 'mysql/mysql-server:8.0'
-  when:
-    - ansible_architecture is not search('armv7')
-    - mysql_docker_image == 'hypriot/rpi-mysql:5.5'
+    - "'geerlingguy/drupal:latest-' in drupal_docker_image"
