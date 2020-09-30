@@ -30,7 +30,7 @@ These directions assume you're working directly on your Raspberry Pi, running Ra
      1. Click OK, then reboot the Raspberry Pi.
   1. Once rebooted, connect the Pi to your local network either via WiFi or wired ethernet.
   1. Open the Terminal application (in the launcher or in Menu > Accessories > Terminal).
-  1. Install Ansible: `sudo apt-get update && sudo apt-get install -y python3-dev python3-pip libffi-dev && sudo pip3 install ansible`
+  1. Install Ansible: `sudo apt-get update && sudo apt-get install -y python3-dev python3-pip libyaml-dev libffi-dev && sudo pip3 install ansible`
   1. Test the Ansible installation: `ansible --version` (should output the Ansible version).
 
 *† If you plan on using your Pi as a headless Drupal server, you don't need all the extra software included with the default Raspbian image. I recommend you use the official 'Raspbian Lite' image instead; see the next section.*
@@ -64,7 +64,7 @@ These directions assume you're working either directly on your Raspberry Pi, run
      1. Scroll down to 'Finished', hit return, and reboot the Raspberry Pi.
   1. Once rebooted, connect the Pi to your local network either via [WiFi](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/setting-up-wifi-with-occidentalis) or wired ethernet.
   1. Log back in (either on the Pi directly or via SSH).
-  1. Install Git and Ansible: `sudo apt-get update && sudo apt-get install -y python3-dev python3-pip libffi-dev git && sudo pip3 install ansible`
+  1. Install Ansible: `sudo apt-get update && sudo apt-get install -y python3-dev python3-pip libyaml-dev libffi-dev git && sudo pip3 install ansible`
   1. Test the Ansible installation: `ansible --version` (should output the Ansible version).
 
 ## Install LEMP software stack and Drupal with Ansible and Docker
