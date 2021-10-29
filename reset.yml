@@ -1,6 +1,6 @@
 ---
 - hosts: pi
-  become: yes
+  become: true
 
   vars_files:
     - default.config.yml

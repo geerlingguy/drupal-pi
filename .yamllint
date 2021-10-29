@@ -1,0 +1,12 @@
+---
+extends: default
+
+rules:
+  line-length:
+    max: 180
+    level: warning
+
+ignore: |
+  .github/stale.yml
+  config.yml
+  roles/geerlingguy.*
