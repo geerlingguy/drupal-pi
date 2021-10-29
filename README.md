@@ -1,6 +1,6 @@
 # Drupal Pi
 
-[![Build Status](https://travis-ci.org/geerlingguy/drupal-pi.svg?branch=master)](https://travis-ci.org/geerlingguy/drupal-pi)
+[![CI](https://github.com/geerlingguy/drupal-pi/actions/workflows/CI.yml/badge.svg?branch=master)](https://github.com/geerlingguy/drupal-pi/actions/workflows/CI.yml)
 
 **Drupal on Docker on a Raspberry Pi**
 
