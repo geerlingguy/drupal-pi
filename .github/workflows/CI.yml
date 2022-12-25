@@ -46,7 +46,8 @@ jobs:
         run: >-
           docker run --detach --name drupalpi
           --add-host "${{ env.HOSTNAME }}$(echo -e "\t")${{ env.MACHINE_NAME }}":127.0.0.1
-          --volume="${PWD}":${{ env.PLAYBOOK_DIR }}/:rw --privileged --volume=/var/lib/docker --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro
+          --volume="${PWD}":${{ env.PLAYBOOK_DIR }}/:rw --privileged --volume=/var/lib/docker
+          --volume=/sys/fs/cgroup:/sys/fs/cgroup:rw --cgroupns=host
           geerlingguy/docker-debian10-ansible:latest /lib/systemd/systemd
 
       - name: Install Python 3.
