@@ -22,7 +22,6 @@
       - openssh-client
       - libffi-dev
       - libssl-dev
-      - python-backports.ssl-match-hostname
       # For some flavors of Debian without cron installed by default.
       - cron
     state: present
