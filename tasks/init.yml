@@ -2,7 +2,7 @@
 - name: Update apt cache if needed.
   apt:
     update_cache: true
-    cache_valid_time: 86400
+    cache_valid_time: 900
 
 - name: Ensure /usr/local/bin exists.
   file:
