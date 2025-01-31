@@ -1,6 +1,6 @@
 # Drupal Pi
 
-[![CI](https://github.com/geerlingguy/drupal-pi/actions/workflows/CI.yml/badge.svg?branch=master)](https://github.com/geerlingguy/drupal-pi/actions/workflows/CI.yml)
+[![CI](https://github.com/geerlingguy/drupal-pi/actions/workflows/CI.yml/badge.svg)](https://github.com/geerlingguy/drupal-pi/actions/workflows/CI.yml)
 
 **Drupal on Docker on a Raspberry Pi**
 
