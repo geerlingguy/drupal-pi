@@ -4,4 +4,4 @@
 - src: geerlingguy.git
 - src: geerlingguy.nginx
 - src: geerlingguy.pip
-- src: geerlingguy.docker_arm
+- src: geerlingguy.docker

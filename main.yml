@@ -29,7 +29,7 @@
     - name: geerlingguy.nginx
       tags: ['nginx']
     - geerlingguy.pip
-    - geerlingguy.docker_arm
+    - geerlingguy.docker
 
   tasks:
     - name: Include hook-tasks.yml if it exists.

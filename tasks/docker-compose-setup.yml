@@ -20,7 +20,7 @@
 
 - name: Stop all Docker containers if docker-compose.yml has changed.
   command: >
-    docker-compose stop
+    docker compose stop
     chdir={{ drupal_pi_app_directory }}
   when: docker_compose_file_result.changed
 
@@ -28,5 +28,5 @@
 # https://github.com/ansible/ansible/issues/26937
 - name: Bring up the Docker containers.
   command: >
-    docker-compose up -d --remove-orphans
+    docker compose up -d --remove-orphans
     chdir={{ drupal_pi_app_directory }}
