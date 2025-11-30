@@ -81,7 +81,7 @@ You need to download this repository to the Pi and run the included playbook to 
 
 After a few minutes, the playbook should complete successfully, and you should have Drupal running on your Raspberry Pi, accessible via `http://localhost/`
 
-To be able to access the site from other computers on your network (e.g. by accessing `http://www.drupalpi.test/`, [add an entry to your local hosts file](http://www.rackspace.com/knowledge_center/article/how-do-i-modify-my-hosts-file) like `[ip-of-raspberry-pi]  www.drupalpi.test`.
+To be able to access the site from other computers on your network (e.g. by accessing `http://www.drupalpi.test/`, [add an entry to your local hosts file](https://www.siteground.com/kb/hosts-file/) like `[ip-of-raspberry-pi]  www.drupalpi.test`.
 
 > **NOTE**: For best security, you should create a `config.yml` file and at least override any `password` settings from the `default.config.yml` file (e.g. `drupal_database_password`).
 
