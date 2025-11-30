@@ -20,7 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.forward_agent = true
 
   # Vagrant box.
-  config.vm.box = 'geerlingguy/debian11'
+  config.vm.box = 'geerlingguy/debian13'
 
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "../main.yml"
