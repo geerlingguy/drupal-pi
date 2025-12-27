@@ -1,5 +1,7 @@
 # Drupal Pi
 
+**DEPRECATED**: Please see my [pi-cluster](https://github.com/geerlingguy/pi-cluster) project for active development; I no longer run a standalone Pi as a Drupal webserver.
+
 [![CI](https://github.com/geerlingguy/drupal-pi/actions/workflows/CI.yml/badge.svg)](https://github.com/geerlingguy/drupal-pi/actions/workflows/CI.yml)
 
 **Drupal on Docker on a Raspberry Pi**
